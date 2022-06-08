@@ -11,10 +11,13 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField] private float _rotationSensitivity;
     [SerializeField] private float _fireRate = 0.25f;
     [SerializeField] private Transform _gunPos;
+    [SerializeField] private int _playerHealth;
 
     public PlayerInputActions playerInput;
     public InputAction move;
     private Rigidbody _rigidbody;
+
+    public Action OnPlayerDeath;
 
     [SerializeField] ParticleSystem _fireMuzzleEffect;
     [SerializeField] Bullet _bullet;
@@ -22,6 +25,11 @@ public class PlayerController : Singleton<PlayerController>
     private float _nextFire = 0;
     Vector3 moveVector = Vector3.zero;
 
+    public bool IsAlive
+    {
+        get { return _isAlive; }
+    }
+    private bool _isAlive = true;
 
     public override void Awake()
     {
@@ -105,6 +113,15 @@ public class PlayerController : Singleton<PlayerController>
             return true;
         else
             return false;
+    }
+
+    public void Damage()
+    {
+        _playerHealth--;
+        if(_playerHealth<=0)
+        {
+            OnPlayerDeath?.Invoke();
+        }
     }
 
     private void OnDisable()

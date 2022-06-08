@@ -7,14 +7,9 @@ public class StateMachine : MonoBehaviour
 {
     BaseState currentState;
 
-    PlayerInputActions playerInputActions;
-
     // Start is called before the first frame update
     void Start()
     {
-        playerInputActions = new PlayerInputActions();
-        playerInputActions.Enable();
-
         currentState = GetInitialState();
         if (currentState != null)
             currentState.Enter();
@@ -45,9 +40,10 @@ public class StateMachine : MonoBehaviour
         return null;
     }
 
-    private void OnGUI()
+    /*private void OnGUI()
     {
         string content = currentState != null ? currentState.name : "(no current state)";
         GUILayout.Label($"<color='black'><size=40>{content}</size></color>");
     }
+    */
 }

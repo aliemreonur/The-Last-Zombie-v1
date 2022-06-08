@@ -56,15 +56,23 @@
     <Analyzer Include="/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Analyzers/Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/Scripts/States/Enemy States/EnemyState.cs" />
     <Compile Include="Assets/Scripts/States/StateMachine.cs" />
     <Compile Include="Assets/Scripts/Player/Bullet.cs" />
+    <Compile Include="Assets/Scripts/States/Enemy States/EnemyHit.cs" />
     <Compile Include="Assets/Scripts/States/Running.cs" />
+    <Compile Include="Assets/PlayerDetect.cs" />
+    <Compile Include="Assets/Scripts/States/Enemy States/EnemyPatrol.cs" />
     <Compile Include="Assets/Scripts/Manager/PoolManager.cs" />
     <Compile Include="Assets/Scripts/States/RunningFiring.cs" />
+    <Compile Include="Assets/Scripts/States/Enemy States/EnemyStateMachine.cs" />
     <Compile Include="Assets/Scripts/Enemy/Zombie.cs" />
     <Compile Include="Assets/Scripts/PlayerInputActions.cs" />
+    <Compile Include="Assets/Scripts/States/Enemy States/EnemyAttacking.cs" />
     <Compile Include="Assets/Scripts/States/Idle.cs" />
     <Compile Include="Assets/Scripts/States/BaseState.cs" />
+    <Compile Include="Assets/Scripts/Manager/GameManager.cs" />
+    <Compile Include="Assets/Scripts/States/Enemy States/EnemyIdle.cs" />
     <Compile Include="Assets/Scripts/Manager/Singleton.cs" />
     <Compile Include="Assets/Scripts/States/Firing.cs" />
     <Compile Include="Assets/Scripts/States/PlayerSM.cs" />
