@@ -1,0 +1,19 @@
+﻿<Properties StartupConfiguration="{9148630B-E3CC-8BDF-CFFE-07D111AA08A7}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Enemy/Zombie.cs">
+    <Files>
+      <File FileName="Assets/Scripts/States/Firing.cs" Line="14" Column="1" />
+      <File FileName="Assets/Scripts/Player/PlayerController.cs" />
+      <File FileName="Assets/Scripts/Manager/PoolManager.cs" />
+      <File FileName="Assets/Scripts/Player/Bullet.cs" />
+      <File FileName="Assets/Scripts/States/RunningFiring.cs" />
+      <File FileName="Assets/Scripts/Enemy/Zombie.cs" Line="21" Column="10" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="7e22a3e8-c9fc-4742-a13c-41bc7a8e8b24" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
