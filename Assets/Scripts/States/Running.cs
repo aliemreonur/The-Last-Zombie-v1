@@ -6,15 +6,15 @@ public class Running : BaseState
 {
     private PlayerSM _playerSm;
 
-    public Running(PlayerSM stateMachine) : base("Running", stateMachine)
+    public Running(PlayerSM stateMachine, Animator animator) : base("Running", stateMachine, animator)
     {
         _playerSm = (PlayerSM)stateMachine;
     }
 
     public override void Enter()
     {
-        _playerSm.animator.SetBool("isRunning", true);
-        _playerSm.animator.SetBool("isShooting", false);
+        animator.SetBool("isRunning", true);
+        animator.SetBool("isShooting", false);
         base.Enter();
     }
 

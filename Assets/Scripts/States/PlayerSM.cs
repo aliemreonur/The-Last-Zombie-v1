@@ -13,10 +13,10 @@ public class PlayerSM : StateMachine
 
     private void Awake()
     {
-        idleState = new Idle(this);
-        runningState = new Running(this);
-        firingState = new Firing(this);
-        runFireState = new RunningFiring(this);
+        idleState = new Idle(this, animator);
+        runningState = new Running(this, animator);
+        firingState = new Firing(this, animator);
+        runFireState = new RunningFiring(this, animator);
         //add the animator additional to this??
     }
 

@@ -16,10 +16,7 @@ public class EnemyIdle : EnemyState
 
     public override void NormalUpdate()
     {
-        if(zombie.IsAttacking)
-        {
-            enemyStateMachine.ChangeState(enemyStateMachine.enemyAttacking);
-        }
+
         base.NormalUpdate();
     }
 
@@ -28,6 +25,12 @@ public class EnemyIdle : EnemyState
         if(zombie.IsHit)
         {
             enemyStateMachine.ChangeState(enemyStateMachine.enemyHit);
+        }
+
+        if(zombie.IsAlerted)
+        {
+            Debug.Log("zombie is alerted");
+            enemyStateMachine.ChangeState(enemyStateMachine.enemyChasePlayer);
         }
         base.PhysicsUpdate();
         

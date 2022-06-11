@@ -6,128 +6,150 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : Singleton<PlayerController>
 {
+    [SerializeField] ParticleSystem _fireMuzzleEffect;
+    [SerializeField] Bullet _bullet;
     [SerializeField] private float _speed;
-    [SerializeField] private float _jumpHeight;
-    [SerializeField] private float _rotationSensitivity;
     [SerializeField] private float _fireRate = 0.25f;
     [SerializeField] private Transform _gunPos;
     [SerializeField] private int _playerHealth;
+    [SerializeField] private int _clipSize = 14; //this will be updated with the weapons class - according to the weapon holding!
+    [SerializeField] private AudioClip _gunShotEffect, _reloadEffect;
 
     public PlayerInputActions playerInput;
-    public InputAction move;
-    private Rigidbody _rigidbody;
-
+    public InputAction move, rotate;
     public Action OnPlayerDeath;
+    public Action OnPlayerReload;
 
-    [SerializeField] ParticleSystem _fireMuzzleEffect;
-    [SerializeField] Bullet _bullet;
 
+    private AudioSource _audioSource;
+    private bool _isReloading;
+    private bool _canShoot = true;
     private float _nextFire = 0;
-    Vector3 moveVector = Vector3.zero;
+    private int _currentAmmo;
+    private Vector3 moveVector, lookVector = Vector3.zero;
+    private WaitForSeconds _reloadTime = new WaitForSeconds(2);
 
     public bool IsAlive
     {
         get { return _isAlive; }
     }
+
     private bool _isAlive = true;
 
     public override void Awake()
     {
         base.Awake();
-        InitInputActions();
+        _audioSource = GetComponent<AudioSource>();
+        if(_audioSource == null)
+        {
+            Debug.LogError("The audio source of the palyer is null");
+        }
+        playerInput = new PlayerInputActions();
+        _currentAmmo = _clipSize;
     }
 
 
     void FixedUpdate()
     {
         Move();
-        LookRotation();
+        LookAt();
+        Reload();
     }
 
-    private void InitInputActions()
-    {
-        playerInput = new PlayerInputActions();
-        _rigidbody = GetComponent<Rigidbody>();
-        if (_rigidbody == null) Debug.LogError("The rigidbody of the player is null");
-    }
-
-    private void Move()
-    {
-        moveVector += new Vector3(move.ReadValue<Vector2>().x, 0, move.ReadValue<Vector2>().y);
-
-        _rigidbody.AddForce(moveVector, ForceMode.Impulse);
-        moveVector = Vector3.zero;
-
-        if (_rigidbody.velocity.y < 0f)
-            _rigidbody.velocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime;
-    }
-
-    private void LookRotation()
-    {
-        Vector3 direction = _rigidbody.velocity;
-        direction.y = 0;
-
-        if (move.ReadValue<Vector2>() != Vector2.zero && direction != Vector3.zero)
-        {
-            _rigidbody.rotation = Quaternion.LookRotation(direction, Vector3.up);
-        }
-        else
-            _rigidbody.angularVelocity = Vector3.zero;
-    }
-
-    public void Fire()
-    {
-        if(Time.time > _nextFire)
-        {
-            Bullet bullet = PoolManager.Instance.RequestBullet();
-            bullet.transform.position = transform.position + Vector3.up;
-            bullet.transform.rotation = transform.rotation;
-            _fireMuzzleEffect.Play();
-            bullet.gameObject.SetActive(true);
-            _nextFire = Time.time + _fireRate;
-        }
-    }
-
-    private void OnEnable()
-    {
-        playerInput.Player.Enable();
-        move = playerInput.Player.Move;
-        playerInput.Player.Jump.started += OnJump;
-
-    }
-
-
-    private void OnJump(InputAction.CallbackContext obj)
-    {
-        if(IsGrounded())
-        {
-            moveVector += Vector3.up * _jumpHeight;
-        }
-    }
-
-    private bool IsGrounded()
-    {
-        Ray checkGroundRay = new Ray(transform.position + Vector3.up * 0.25f, Vector3.down);
-        RaycastHit hitInfo;
-        if (Physics.Raycast(checkGroundRay, out hitInfo, 0.3f)) //can check tags for multiple surfaces.
-            return true;
-        else
-            return false;
-    }
 
     public void Damage()
     {
         _playerHealth--;
-        if(_playerHealth<=0)
+        if (_playerHealth <= 0)
         {
             OnPlayerDeath?.Invoke();
         }
     }
 
+    public void Fire()
+    {
+        if (Time.time > _nextFire && _currentAmmo>0 && _canShoot)
+        {
+            if(_fireMuzzleEffect != null)
+            {
+                _fireMuzzleEffect.Play();
+            }
+            if(_gunShotEffect != null)
+            {
+                _audioSource.PlayOneShot(_gunShotEffect);
+            }
+            Bullet bullet = PoolManager.Instance.RequestBullet(transform.position + Vector3.up);
+            bullet.transform.rotation = transform.rotation;
+            _nextFire = Time.time + _fireRate;
+            _currentAmmo--;
+            UIManager.Instance.UpdateAmmoCount(_currentAmmo, _clipSize, _currentAmmo <= 0);
+            if (_currentAmmo <=0)
+            {
+                _isReloading = true;
+            }
+        }
+    }
+
+    private void Move()
+    {
+        if (move.ReadValue<Vector2>() != Vector2.zero)
+        {
+            moveVector = new Vector3(move.ReadValue<Vector2>().x, 0, move.ReadValue<Vector2>().y);
+
+            transform.Translate(moveVector * _speed * Time.deltaTime, Space.World);
+            transform.rotation = Quaternion.LookRotation(moveVector, Vector3.up);
+        }
+    }
+
+    private void LookAt()
+    {
+        if(rotate.ReadValue<Vector2>() != Vector2.zero)
+        {
+            lookVector = new Vector3(rotate.ReadValue<Vector2>().x, 0, rotate.ReadValue<Vector2>().y);
+            transform.rotation = Quaternion.LookRotation(lookVector, Vector3.up);
+        }
+        
+    }
+
+    private void Reload()
+    {
+        if((Input.GetKeyDown(KeyCode.R) || _isReloading) && _currentAmmo < _clipSize)
+        {
+            if(_reloadEffect != null)
+            {
+                _audioSource.PlayOneShot(_reloadEffect);
+            }
+            //use the new input system
+            _canShoot = false;
+            _isReloading = true;
+            OnPlayerReload?.Invoke();
+            StartCoroutine(ReloadRoutine());
+            _isReloading = false;
+        }
+        //Access the reloading fill image
+        //the coroutine image fill according to reload time
+        //On screen Reloading text flashing on and of
+        //only return hasreloaded to true if the reload has finished. 
+    }
+
+
+    private void OnEnable()
+    {
+        playerInput.Player.Enable();
+        move = playerInput.Player.Move;
+        rotate = playerInput.Player.Rotate;
+    }
+
     private void OnDisable()
     {
-        playerInput.Player.Jump.started -= OnJump;
         playerInput.Player.Disable();
+    }
 
+    IEnumerator ReloadRoutine()
+    {
+        yield return _reloadTime;
+        _currentAmmo = _clipSize;
+        UIManager.Instance.UpdateAmmoCount(_currentAmmo, _clipSize, false);
+        _canShoot = true;
     }
 }

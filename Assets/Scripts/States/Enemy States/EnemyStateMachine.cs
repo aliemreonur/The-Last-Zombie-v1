@@ -10,11 +10,12 @@ public class EnemyStateMachine : MonoBehaviour
     private EnemyState currentEnemyState;
     private Zombie _zombie;
 
-
     [HideInInspector] public EnemyIdle enemyIdle;
     [HideInInspector] public EnemyPatrol enemyPatrol;
     [HideInInspector] public EnemyAttacking enemyAttacking;
     [HideInInspector] public EnemyHit enemyHit;
+    [HideInInspector] public EnemyDead enemyDead;
+    [HideInInspector] public EnemyChasePlayer enemyChasePlayer;
 
 
     // Start is called before the first frame update
@@ -25,6 +26,8 @@ public class EnemyStateMachine : MonoBehaviour
         enemyPatrol = new EnemyPatrol(_zombie, _navMeshAgent, _animator, this);
         enemyAttacking = new EnemyAttacking(_zombie, _navMeshAgent, _animator, this);
         enemyHit = new EnemyHit(_zombie, _navMeshAgent, _animator, this);
+        enemyDead = new EnemyDead(_zombie, _navMeshAgent, _animator, this);
+        enemyChasePlayer = new EnemyChasePlayer(_zombie, _navMeshAgent, _animator, this);
         //is it possible to use generic here??
     }
 
@@ -35,8 +38,6 @@ public class EnemyStateMachine : MonoBehaviour
         {
             currentEnemyState.Enter();
         }
-
-        _zombie.Damage();
     }
 
     // Update is called once per frame
@@ -70,17 +71,19 @@ public class EnemyStateMachine : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision other)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
+        if (other.gameObject.CompareTag("Bullet"))
         {
-            Debug.Log("Decrease the zombie health");
+            //PoolManager.Instance.RequestBloodEffect(other.GetContact(0).point);
+            PoolManager.Instance.RequestBloodEffect(other.transform.position);
+            other.gameObject.SetActive(false);
+            _zombie.Damage();
         }
     }
 
     private void Initialize()
     {
-        //TOO MANY GET COMPONENTS WITH MANY ZOMBIES! 
         _navMeshAgent = GetComponent<NavMeshAgent>();
         if (_navMeshAgent == null)
         {

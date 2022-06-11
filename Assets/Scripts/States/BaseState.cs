@@ -6,11 +6,13 @@ public class BaseState
 {
     public string name;
     protected StateMachine stateMachine;
+    protected Animator animator;
 
-    public BaseState(string name, StateMachine stateMachine)
+    public BaseState(string name, StateMachine stateMachine, Animator animator)
     {
         this.name = name;
         this.stateMachine = stateMachine;
+        this.animator = animator;
     }
 
     public virtual void Enter() { }

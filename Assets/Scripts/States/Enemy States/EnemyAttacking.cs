@@ -10,6 +10,8 @@ public class EnemyAttacking : EnemyState
     public override void Enter()
     {
         base.Enter();
+        zombie.IsAttacking = true;
+        animator.SetBool("isAttacking", true);
     }
 
     public override void NormalUpdate()
@@ -19,13 +21,24 @@ public class EnemyAttacking : EnemyState
 
     public override void PhysicsUpdate()
     {
+        if(zombie.DistanceToPlayer() > 1.5f && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+        {
+            enemyStateMachine.ChangeState(enemyStateMachine.enemyChasePlayer);
+        }
         base.PhysicsUpdate();
     }
 
     public override void Exit()
     {
+        navMeshAgent.isStopped = false;
+        zombie.IsAttacking = false;
+        animator.SetBool("isAttacking", false);
         base.Exit();
     }
 
+    private void Attack(bool isAttacking)
+    {
+
+    }
 
 }

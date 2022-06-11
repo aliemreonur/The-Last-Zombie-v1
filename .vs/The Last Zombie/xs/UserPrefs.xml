@@ -1,23 +1,21 @@
 ﻿<Properties StartupConfiguration="{9148630B-E3CC-8BDF-CFFE-07D111AA08A7}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/States/Enemy States/EnemyStateMachine.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Player/PlayerController.cs">
     <Files>
-      <File FileName="Assets/Scripts/Enemy/Zombie.cs" Line="121" Column="10" />
-      <File FileName="Assets/PlayerDetect.cs" Line="14" Column="1" />
+      <File FileName="Assets/Scripts/Player/PlayerController.cs" Line="143" Column="26" />
+      <File FileName="Assets/Scripts/Manager/UIManager.cs" Line="60" Column="41" />
+      <File FileName="Assets/Scripts/Enemy/Zombie.cs" />
       <File FileName="Assets/Scripts/States/RunningFiring.cs" />
-      <File FileName="Assets/Scripts/States/StateMachine.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/States/PlayerSM.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/States/Enemy States/EnemyHit.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/States/Enemy States/EnemyStateMachine.cs" Line="24" Column="72" />
-      <File FileName="Assets/Scripts/States/Enemy States/EnemyState.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/States/Enemy States/EnemyIdle.cs" Line="30" Column="1" />
-      <File FileName="Assets/Scripts/States/Enemy States/EnemyPatrol.cs" />
+      <File FileName="Assets/Scripts/States/Enemy States/EnemyChasePlayer.cs" />
       <File FileName="Assets/Scripts/States/Enemy States/EnemyAttacking.cs" />
-      <File FileName="Assets/Scripts/States/BaseState.cs" Line="10" Column="50" />
+      <File FileName="Assets/Scripts/Manager/SpawnManager.cs" />
+      <File FileName="Assets/Scripts/States/Enemy States/EnemyStateMachine.cs" Line="100" Column="78" />
+      <File FileName="Assets/Scripts/States/Enemy States/EnemyState.cs" />
+      <File FileName="Assets/Scripts/Player/Bullet.cs" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="a6204652-2ca5-4880-a913-b03b322aaec7" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="deb8877f-2874-47ef-b4f4-34b612a65b66" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -33,4 +33,5 @@ public class EnemyHit : EnemyState
         animator.ResetTrigger("isHit");
         base.Exit();
     }
+
 }

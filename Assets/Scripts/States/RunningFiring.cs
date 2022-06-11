@@ -6,15 +6,15 @@ public class RunningFiring : BaseState
 {
     PlayerSM _playerSm;
 
-    public RunningFiring(PlayerSM stateMachine) : base("RunningFiring", stateMachine)
+    public RunningFiring(PlayerSM stateMachine, Animator animator) : base("RunningFiring", stateMachine, animator)
     {
         _playerSm = (PlayerSM)stateMachine;
     }
 
     public override void Enter()
     {
-        _playerSm.animator.SetBool("isRunning", true);
-        _playerSm.animator.SetBool("isShooting", true);
+        animator.SetBool("isRunning", true);
+        animator.SetBool("isShooting", true);
         base.Enter();
     }
 

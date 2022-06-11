@@ -24,9 +24,9 @@ public class EnemyState
     public virtual void NormalUpdate() { }
     public virtual void PhysicsUpdate()
     {
-        if(zombie.IsHit && zombie.IsAlive)
+        if(!zombie.IsAlive)
         {
-            enemyStateMachine.ChangeState(enemyStateMachine.enemyHit);
+            enemyStateMachine.ChangeState(enemyStateMachine.enemyDead);
         }
     }
     public virtual void Exit() { }
