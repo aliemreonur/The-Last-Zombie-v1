@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class Idle : BaseState
 {
-    PlayerSM _playerSm;
-
-    public Idle(PlayerSM stateMachine, Animator animator) : base("Idle", stateMachine, animator)
-    {
-        _playerSm = (PlayerSM)stateMachine;
-    }
+    public Idle(PlayerSM stateMachine, Animator animator) : base("Idle", stateMachine, animator){}
 
     public override void Enter()
     {
@@ -22,9 +17,9 @@ public class Idle : BaseState
     {
         //this is with too many dots???
         if (PlayerController.Instance.playerInput.Player.Move.ReadValue<Vector2>() != Vector2.zero)
-            stateMachine.ChangeState(_playerSm.runningState);
+            stateMachine.ChangeState(stateMachine.runningState);
         if(PlayerController.Instance.playerInput.Player.Fire.WasPressedThisFrame())
-            stateMachine.ChangeState(_playerSm.firingState);
+            stateMachine.ChangeState(stateMachine.firingState);
         base.NormalUpdate();
     }
 

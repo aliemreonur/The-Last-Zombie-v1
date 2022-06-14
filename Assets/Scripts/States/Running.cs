@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class Running : BaseState
 {
-    private PlayerSM _playerSm;
-
-    public Running(PlayerSM stateMachine, Animator animator) : base("Running", stateMachine, animator)
-    {
-        _playerSm = (PlayerSM)stateMachine;
-    }
+    public Running(PlayerSM stateMachine, Animator animator) : base("Running", stateMachine, animator){}
 
     public override void Enter()
     {
@@ -22,10 +17,10 @@ public class Running : BaseState
     {
         if (PlayerController.Instance.playerInput.Player.Move.ReadValue<Vector2>() == Vector2.zero)
         {
-            stateMachine.ChangeState(_playerSm.idleState);
+            stateMachine.ChangeState(stateMachine.idleState);
         }
         if (PlayerController.Instance.playerInput.Player.Fire.WasPressedThisFrame())
-            stateMachine.ChangeState(_playerSm.runFireState);
+            stateMachine.ChangeState(stateMachine.runFireState);
         base.NormalUpdate();
     }
 

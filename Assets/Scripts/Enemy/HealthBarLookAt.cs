@@ -16,7 +16,7 @@ public class HealthBarLookAt : MonoBehaviour
         {
             transform.rotation = Quaternion.identity;
         }
- 
+
         /*
         Vector3 posAccordingToCam = _mainCam.transform.position - transform.position;
         posAccordingToCam.x = posAccordingToCam.z = 0;

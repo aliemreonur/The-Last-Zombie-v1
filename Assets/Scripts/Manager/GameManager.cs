@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -15,7 +16,7 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        
+        OnGameStart(); //this will be tied to a button or tap to screen!
     }
 
     // Update is called once per frame
@@ -27,6 +28,7 @@ public class GameManager : Singleton<GameManager>
     public void OnGameStart()
     {
         IsRunning = true;
+        Time.timeScale = 1;
     }
 
     public void OnGameEnd(bool isSuccess)
@@ -41,4 +43,25 @@ public class GameManager : Singleton<GameManager>
             Debug.Log("Restart Level");
         }
     }
+
+    private void StopTime()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    private void OnEnable()
+    {
+        EndLevel.OnSuccess += StopTime;
+    }
+
+    private void OnDisable()
+    {
+        EndLevel.OnSuccess -= StopTime;
+    }
+
 }

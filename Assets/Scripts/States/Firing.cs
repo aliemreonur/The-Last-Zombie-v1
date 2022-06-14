@@ -5,12 +5,7 @@ using System;
 
 public class Firing : BaseState
 {
-    PlayerSM _playerSm;
-
-    public Firing(PlayerSM stateMachine, Animator animator) : base("Firing", stateMachine, animator)
-    {
-        _playerSm = (PlayerSM)stateMachine;
-    }
+    public Firing(PlayerSM stateMachine, Animator animator) : base("Firing", stateMachine, animator){}
 
     public override void Enter()
     {
@@ -25,14 +20,14 @@ public class Firing : BaseState
         if(PlayerController.Instance.playerInput.Player.Fire.WasReleasedThisFrame())
         {
             if (PlayerController.Instance.playerInput.Player.Move.ReadValue<Vector2>() == Vector2.zero)
-                stateMachine.ChangeState(_playerSm.idleState);
+                stateMachine.ChangeState(stateMachine.idleState);
             else
-                stateMachine.ChangeState(_playerSm.runningState);
+                stateMachine.ChangeState(stateMachine.runningState);
         }
 
         else if(PlayerController.Instance.playerInput.Player.Move.ReadValue<Vector2>() != Vector2.zero)
         {
-            stateMachine.ChangeState(_playerSm.runFireState);
+            stateMachine.ChangeState(stateMachine.runFireState);
         }
         
         base.NormalUpdate();

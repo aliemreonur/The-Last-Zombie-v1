@@ -11,11 +11,15 @@ public class Zombie : MonoBehaviour
     [SerializeField] private Image _healthBg;
     [SerializeField] private Image _healthBar;
 
+
+
     //private float _zSpeed;
     private bool _isAlerted, _isAttacking;
+    private bool _isNextToPlayer = false;
     private float _distanceToPlayer;
     private WaitForSeconds hitResetTime = new WaitForSeconds(0.5f);
     private WaitForSeconds healthBarResetTime = new WaitForSeconds(1.5f);
+    private Rigidbody _rigidbody;
     private float _maxZHealth;
 
 
@@ -72,11 +76,13 @@ public class Zombie : MonoBehaviour
             _isAttacking = value;
         }
     }
+
     #endregion
 
 
     private void Start()
     {
+        _rigidbody = GetComponent<Rigidbody>();
         HealthBarActive(false);
         _distanceToPlayer = 50;
         _maxZHealth = _zHealth;
@@ -101,10 +107,25 @@ public class Zombie : MonoBehaviour
         if (Time.frameCount % 4 == 0)
         {
             _distanceToPlayer = Vector3.Distance(this.transform.position, PlayerController.Instance.transform.position);
+
+            if (_distanceToPlayer < 1.5f && !_isNextToPlayer)
+            {
+                _isNextToPlayer = true;
+            }
+            else
+            {
+                _isNextToPlayer = false;
+           
+            }
+            if(_isNextToPlayer)
+            {
+                //WILL BE DELETED
+                Debug.Log("The distance to player :" + _distanceToPlayer);
+            }
+
         }
         return _distanceToPlayer;
     }
-
 
     private void HealthBarActive(bool isActive)
     {

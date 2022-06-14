@@ -5,10 +5,10 @@ using UnityEngine;
 public class BaseState
 {
     public string name;
-    protected StateMachine stateMachine;
+    protected PlayerSM stateMachine;
     protected Animator animator;
 
-    public BaseState(string name, StateMachine stateMachine, Animator animator)
+    public BaseState(string name, PlayerSM stateMachine, Animator animator)
     {
         this.name = name;
         this.stateMachine = stateMachine;

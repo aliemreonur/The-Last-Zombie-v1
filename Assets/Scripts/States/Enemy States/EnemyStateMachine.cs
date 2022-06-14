@@ -17,6 +17,7 @@ public class EnemyStateMachine : MonoBehaviour
     [HideInInspector] public EnemyDead enemyDead;
     [HideInInspector] public EnemyChasePlayer enemyChasePlayer;
 
+    private WaitForSeconds delayBeforePatrol = new WaitForSeconds(2f);
 
     // Start is called before the first frame update
     void Awake()
@@ -47,7 +48,6 @@ public class EnemyStateMachine : MonoBehaviour
         {
             currentEnemyState.NormalUpdate();
         }
-
     }
 
     private void FixedUpdate()
@@ -70,13 +70,19 @@ public class EnemyStateMachine : MonoBehaviour
         return enemyIdle;
     }
 
+    public void Delay() //this method is for delaying a non-monobehaviour script, inheriting enemy states.
+    {
+        StartCoroutine(DelayForPatrolRoutine());
+    }
+
 
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
             //PoolManager.Instance.RequestBloodEffect(other.GetContact(0).point);
-            PoolManager.Instance.RequestBloodEffect(other.transform.position);
+            BloodEffect bloodEffect= PoolManager.Instance.RequestBloodEffect(other.transform.position);
+            bloodEffect.transform.parent = transform;
             other.gameObject.SetActive(false);
             _zombie.Damage();
         }
@@ -89,6 +95,7 @@ public class EnemyStateMachine : MonoBehaviour
         {
             Debug.LogError("The nav mesh agent of the zombie is null");
         }
+        _navMeshAgent.speed = 1.5f; //this will be pulled through the hardness level
         _animator = GetComponent<Animator>();
         if (_animator == null)
         {
@@ -100,6 +107,27 @@ public class EnemyStateMachine : MonoBehaviour
             Debug.LogError("The Enemystate could not get its zombie script");
         }
 
+    }
+
+    private void OnEnable()
+    {
+        EndLevel.OnSuccess += OnGameEnd;
+    }
+
+    private void OnGameEnd()
+    {
+        ChangeState(enemyIdle);
+        _navMeshAgent.speed = 0;
+    }
+
+    private void OnDisable()
+    {
+        EndLevel.OnSuccess -= OnGameEnd;
+    }
+
+    IEnumerator DelayForPatrolRoutine()
+    {
+        yield return delayBeforePatrol;
     }
 
     private void OnGUI()

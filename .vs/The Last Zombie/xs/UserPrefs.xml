@@ -1,21 +1,20 @@
 ﻿<Properties StartupConfiguration="{9148630B-E3CC-8BDF-CFFE-07D111AA08A7}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Player/PlayerController.cs">
     <Files>
-      <File FileName="Assets/Scripts/Player/PlayerController.cs" Line="143" Column="26" />
-      <File FileName="Assets/Scripts/Manager/UIManager.cs" Line="60" Column="41" />
-      <File FileName="Assets/Scripts/Enemy/Zombie.cs" />
-      <File FileName="Assets/Scripts/States/RunningFiring.cs" />
-      <File FileName="Assets/Scripts/States/Enemy States/EnemyChasePlayer.cs" />
-      <File FileName="Assets/Scripts/States/Enemy States/EnemyAttacking.cs" />
+      <File FileName="Assets/Scripts/States/PlayerSM.cs" Line="18" Column="47" />
+      <File FileName="Assets/Scripts/States/Enemy States/EnemyStateMachine.cs" />
+      <File FileName="Assets/Scripts/States/Enemy States/EnemyPatrol.cs" />
       <File FileName="Assets/Scripts/Manager/SpawnManager.cs" />
-      <File FileName="Assets/Scripts/States/Enemy States/EnemyStateMachine.cs" Line="100" Column="78" />
-      <File FileName="Assets/Scripts/States/Enemy States/EnemyState.cs" />
-      <File FileName="Assets/Scripts/Player/Bullet.cs" />
+      <File FileName="Assets/Scripts/Enemy/Zombie.cs" Line="112" Column="14" />
+      <File FileName="Assets/Scripts/Enemy/ZombieAttack.cs" />
+      <File FileName="Assets/Scripts/States/Enemy States/EnemyAttacking.cs" />
+      <File FileName="Assets/Scripts/Shoot.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player/PlayerController.cs" Line="100" Column="10" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="deb8877f-2874-47ef-b4f4-34b612a65b66" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="b9fdd879-dfb4-496c-b3f6-4a4832106e2b" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

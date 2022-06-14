@@ -11,13 +11,13 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField] private float _speed;
     [SerializeField] private float _fireRate = 0.25f;
     [SerializeField] private Transform _gunPos;
-    [SerializeField] private int _playerHealth;
+    //[SerializeField] private int _playerHealth;
     [SerializeField] private int _clipSize = 14; //this will be updated with the weapons class - according to the weapon holding!
     [SerializeField] private AudioClip _gunShotEffect, _reloadEffect;
 
     public PlayerInputActions playerInput;
     public InputAction move, rotate;
-    public Action OnPlayerDeath;
+
     public Action OnPlayerReload;
 
 
@@ -52,18 +52,8 @@ public class PlayerController : Singleton<PlayerController>
     void FixedUpdate()
     {
         Move();
-        LookAt();
+        //LookAt();
         Reload();
-    }
-
-
-    public void Damage()
-    {
-        _playerHealth--;
-        if (_playerHealth <= 0)
-        {
-            OnPlayerDeath?.Invoke();
-        }
     }
 
     public void Fire()
@@ -79,7 +69,7 @@ public class PlayerController : Singleton<PlayerController>
                 _audioSource.PlayOneShot(_gunShotEffect);
             }
             Bullet bullet = PoolManager.Instance.RequestBullet(transform.position + Vector3.up);
-            bullet.transform.rotation = transform.rotation;
+            bullet.transform.rotation = _gunPos.transform.rotation;
             _nextFire = Time.time + _fireRate;
             _currentAmmo--;
             UIManager.Instance.UpdateAmmoCount(_currentAmmo, _clipSize, _currentAmmo <= 0);

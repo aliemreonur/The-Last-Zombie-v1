@@ -25,6 +25,7 @@ public class EnemyAttacking : EnemyState
         {
             enemyStateMachine.ChangeState(enemyStateMachine.enemyChasePlayer);
         }
+
         base.PhysicsUpdate();
     }
 
@@ -34,11 +35,6 @@ public class EnemyAttacking : EnemyState
         zombie.IsAttacking = false;
         animator.SetBool("isAttacking", false);
         base.Exit();
-    }
-
-    private void Attack(bool isAttacking)
-    {
-
     }
 
 }

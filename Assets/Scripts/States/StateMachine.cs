@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class StateMachine : MonoBehaviour
 {
+    /*
     BaseState currentState;
 
     // Start is called before the first frame update
@@ -39,6 +40,7 @@ public class StateMachine : MonoBehaviour
     {
         return null;
     }
+    */
 
     /*private void OnGUI()
     {

@@ -9,8 +9,9 @@ public class ZombieAttack : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            Debug.Log("Trigerred attack on player");
-            PlayerController.Instance.Damage();
+           
+            Player.Instance.Damage(5);
+            //this damage amount will be changed according to the difficulty level!
         }
     }
 }

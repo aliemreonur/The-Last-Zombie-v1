@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSM : StateMachine
+public class PlayerSM : MonoBehaviour
 {
     [HideInInspector] public Idle idleState;
     [HideInInspector] public Running runningState;
@@ -10,6 +10,7 @@ public class PlayerSM : StateMachine
     [HideInInspector] public RunningFiring runFireState;
 
     public Animator animator;
+    BaseState currentState;
 
     private void Awake()
     {
@@ -20,10 +21,36 @@ public class PlayerSM : StateMachine
         //add the animator additional to this??
     }
 
-    protected override BaseState GetInitialState()
+
+
+    void Start()
+    {
+        currentState = GetInitialState();
+        if (currentState != null)
+            currentState.Enter();
+    }
+
+    void Update()
+    {
+        if (currentState != null)
+            currentState.NormalUpdate();
+    }
+
+    private void FixedUpdate()
+    {
+        if (currentState != null)
+            currentState.PhysicsUpdate();
+    }
+
+    public void ChangeState(BaseState newState)
+    {
+        currentState.Exit();
+        currentState = newState;
+        newState.Enter();
+    }
+
+    public BaseState GetInitialState()
     {
         return idleState;
     }
-
-
 }

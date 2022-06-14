@@ -59,6 +59,7 @@
     <Compile Include="Assets/Scripts/Enemy/ZombieAttack.cs" />
     <Compile Include="Assets/Scripts/States/Enemy States/EnemyState.cs" />
     <Compile Include="Assets/Scripts/States/StateMachine.cs" />
+    <Compile Include="Assets/Scripts/Options.cs" />
     <Compile Include="Assets/Scripts/Manager/SpawnManager.cs" />
     <Compile Include="Assets/Scripts/Player/Bullet.cs" />
     <Compile Include="Assets/Scripts/Enemy/PlayerDetect.cs" />
@@ -83,8 +84,11 @@
     <Compile Include="Assets/Scripts/Manager/Singleton.cs" />
     <Compile Include="Assets/Scripts/States/Firing.cs" />
     <Compile Include="Assets/Scripts/States/PlayerSM.cs" />
-    <Compile Include="Assets/Scripts/Manager/MainMenu.cs" />
+    <Compile Include="Assets/Scripts/MainMenu.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerController.cs" />
+    <Compile Include="Assets/Scripts/Player/Player.cs" />
+    <Compile Include="Assets/Scripts/EndLevel.cs" />
+    <Compile Include="Assets/Scripts/Shoot.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

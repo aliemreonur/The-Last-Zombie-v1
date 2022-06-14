@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class UIManager : Singleton<UIManager>
 {
     [SerializeField] private Text _reloadText, _ammoText;
+    [SerializeField] GameObject successPanel, failPanel;
+    [SerializeField] Image healthImg;
 
     private WaitForSeconds reloadFlashTime = new WaitForSeconds(0.25f);
     private float _flashTime;
@@ -31,6 +33,21 @@ public class UIManager : Singleton<UIManager>
     void Start()
     {
         PlayerController.Instance.OnPlayerReload += Reloading;
+        successPanel.gameObject.SetActive(false);
+        failPanel.gameObject.SetActive(false);
+    }
+
+    public void EndGame(bool isSuccess)
+    {
+        successPanel.gameObject.SetActive(isSuccess);
+        failPanel.gameObject.SetActive(!isSuccess);
+    }
+
+    public void UpdatePlayerHealth(int health)
+    {
+        float currentHealth = (float)health / 100;
+        Debug.Log("current health: " + currentHealth);
+        healthImg.fillAmount = (float)health/100;
     }
 
 
