@@ -5,9 +5,9 @@ using UnityEngine;
 public class Shoot : Singleton<Shoot>
 {
     /// <summary>
-    /// Better to move the shoot behaviour to gun game object (OR THE HAND - SO THAT IT WHILL CHANGE THE ROTATION AND DIRECTION WITHOUT THE MATTER OF THE WEAPON
+    /// This behaviour is postponed for now - did not get the perfect play experience.
+    /// Needs clamping
     /// </summary>
-    // Start is called before the first frame update
 
     Vector3 lookVector;
 
@@ -21,7 +21,6 @@ public class Shoot : Singleton<Shoot>
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         LookAt();

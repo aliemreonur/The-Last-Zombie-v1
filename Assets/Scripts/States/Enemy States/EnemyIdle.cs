@@ -8,13 +8,14 @@ public class EnemyIdle : EnemyState
     public EnemyIdle(Zombie _zombie, NavMeshAgent _navMeshAgent, Animator _animator, EnemyStateMachine _enemyStateMachine) : base("EnemyIdle", _zombie, _navMeshAgent, _animator, _enemyStateMachine)
     {}
 
-    bool willPatrol = false;
+    //bool willPatrol;
 
     public override void Enter()
     {
-        float patrolDecider = Random.Range(0, 100);
-        willPatrol = patrolDecider > 50 ? true : false;
+        //float patrolDecider = Random.Range(0, 100);
+        //willPatrol = patrolDecider > 50 ? true : false; //changed on the new wave system.
         base.Enter();
+        Patrol();
     }
 
     public override void NormalUpdate()
@@ -35,14 +36,6 @@ public class EnemyIdle : EnemyState
             enemyStateMachine.ChangeState(enemyStateMachine.enemyChasePlayer);
         }
         base.PhysicsUpdate();
-        if(willPatrol)
-        {
-            Debug.Log("Switching to patrol state");
-            Patrol();
-            willPatrol = false;
-        }
-
-        
     }
 
     public override void Exit()

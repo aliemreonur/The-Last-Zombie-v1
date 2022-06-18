@@ -16,7 +16,7 @@ public class EnemyPatrol : EnemyState
     {
         _initialSpeed = navMeshAgent.speed;
         animator.SetBool("isPatroling", true);
-        navMeshAgent.speed = Random.Range(0, 0.6f);
+        navMeshAgent.speed = Random.Range(0.5f, 1.2f);
         base.Enter();
     }
 
@@ -47,7 +47,7 @@ public class EnemyPatrol : EnemyState
     {
         if(!isMoving)
         {
-            pointToMove = new Vector3(Random.Range(SpawnManager.Instance.posXLeftEdge, SpawnManager.Instance.posXRightEdge), 0, Random.Range(SpawnManager.Instance.posZStart, SpawnManager.Instance.posZEnd));
+            pointToMove = new Vector3(Random.Range(SpawnManager.Instance.posXLeftEdge, SpawnManager.Instance.posXRightEdge), 0, SpawnManager.Instance.posZStart);
             isMoving = true;
         }
 
@@ -56,12 +56,6 @@ public class EnemyPatrol : EnemyState
         {
             enemyStateMachine.ChangeState(enemyStateMachine.enemyIdle);
         }
-
-
-        //assign a random point to go
-        //idle for some time if reached to the point or to an end point.
-        //reassign a random point
-        //...
     }
 
 }

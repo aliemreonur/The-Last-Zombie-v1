@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637899632770000000
-    m_Hash: 848009639
+      ticks: 637908719220000000
+    m_Hash: 2518324124
   m_LockFileStatus:
     m_FilePath: /Users/aliemreonur/The Last Zombie/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637899632770000000
-    m_Hash: 654830277
+      ticks: 637908719220000000
+    m_Hash: 2392096447
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -22,6 +22,65 @@ m_LocalPackages:
 m_ProjectPath: /Users/aliemreonur/The Last Zombie/Packages
 m_EditorVersion: 2021.3.3f1 (af2e63e8f9bd)
 m_ResolvedPackages:
+- packageId: com.unity.ai.navigation@1.0.0-exp.4
+  testable: 0
+  isDirectDependency: 1
+  version: 1.0.0-exp.4
+  source: 1
+  resolvedPath: /Users/aliemreonur/The Last Zombie/Library/PackageCache/com.unity.ai.navigation@1.0.0-exp.4
+  assetPath: Packages/com.unity.ai.navigation
+  name: com.unity.ai.navigation
+  displayName: AI Navigation
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: 
+  description: High-level NavMesh components for building and using NavMeshes at
+    runtime and at edit time.
+  status: 4
+  errors: []
+  versions:
+    all:
+    - 1.0.0-exp.1
+    - 1.0.0-exp.2
+    - 1.0.0-exp.3
+    - 1.0.0-exp.4
+    - 1.1.0-pre.1
+    compatible:
+    - 1.0.0-exp.1
+    - 1.0.0-exp.2
+    - 1.0.0-exp.3
+    - 1.0.0-exp.4
+    verified: 
+  dependencies:
+  - name: com.unity.modules.ai
+    version: 1.0.0
+  resolvedDependencies:
+  - name: com.unity.modules.ai
+    version: 1.0.0
+  keywords: []
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+  hideInEditor: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 637631812400000000
+  documentationUrl: 
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.cds.internal.unity3d.com/unity/com.unity.ai.navigation.git
+    revision: e38a28933e4513afa2b6084c2948852bd9daad56
+    path: 
+  unityLifecycle:
+    version: 
+    nextVersion: 
 - packageId: com.unity.cinemachine@2.8.6
   testable: 0
   isDirectDependency: 1

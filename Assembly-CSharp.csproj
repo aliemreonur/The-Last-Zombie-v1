@@ -56,12 +56,15 @@
     <Analyzer Include="/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Analyzers/Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/Scripts/AgentType.cs" />
     <Compile Include="Assets/Scripts/Enemy/ZombieAttack.cs" />
     <Compile Include="Assets/Scripts/States/Enemy States/EnemyState.cs" />
-    <Compile Include="Assets/Scripts/States/StateMachine.cs" />
+    <Compile Include="Assets/Scripts/Wave.cs" />
     <Compile Include="Assets/Scripts/Options.cs" />
     <Compile Include="Assets/Scripts/Manager/SpawnManager.cs" />
     <Compile Include="Assets/Scripts/Player/Bullet.cs" />
+    <Compile Include="Assets/Scripts/Player/Weapon.cs" />
+    <Compile Include="Assets/Scripts/States/PlayerMeleeAttack.cs" />
     <Compile Include="Assets/Scripts/Enemy/PlayerDetect.cs" />
     <Compile Include="Assets/Scripts/States/Enemy States/EnemyDead.cs" />
     <Compile Include="Assets/Scripts/Enemy/HealthBarLookAt.cs" />
@@ -74,9 +77,11 @@
     <Compile Include="Assets/Scripts/States/Enemy States/EnemyStateMachine.cs" />
     <Compile Include="Assets/Scripts/Enemy/Zombie.cs" />
     <Compile Include="Assets/Scripts/PlayerInputActions.cs" />
+    <Compile Include="Assets/Scripts/WeaponType.cs" />
     <Compile Include="Assets/Scripts/States/Enemy States/EnemyChasePlayer.cs" />
     <Compile Include="Assets/Scripts/States/Enemy States/EnemyAttacking.cs" />
     <Compile Include="Assets/Scripts/Enemy/BloodEffect.cs" />
+    <Compile Include="Assets/Scripts/Shoot.cs" />
     <Compile Include="Assets/Scripts/States/Idle.cs" />
     <Compile Include="Assets/Scripts/States/BaseState.cs" />
     <Compile Include="Assets/Scripts/Manager/GameManager.cs" />
@@ -86,9 +91,7 @@
     <Compile Include="Assets/Scripts/States/PlayerSM.cs" />
     <Compile Include="Assets/Scripts/MainMenu.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerController.cs" />
-    <Compile Include="Assets/Scripts/Player/Player.cs" />
     <Compile Include="Assets/Scripts/EndLevel.cs" />
-    <Compile Include="Assets/Scripts/Shoot.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
@@ -830,6 +833,12 @@
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.AI.Navigation.Editor">
+      <HintPath>Library/ScriptAssemblies/Unity.AI.Navigation.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.AI.Navigation">
+      <HintPath>Library/ScriptAssemblies/Unity.AI.Navigation.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.TestTools.CodeCoverage.Editor.dll</HintPath>

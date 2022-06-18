@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
-    [SerializeField] private Text _reloadText, _ammoText;
+    [SerializeField] private Text _reloadText, _ammoText, _weaponText;
     [SerializeField] GameObject successPanel, failPanel;
-    [SerializeField] Image healthImg;
+    [SerializeField] Sprite[] healthImgs;
+    [SerializeField] private Image _currentHealthImg;
+    [SerializeField] private Text _currentWaveText, _numberAliveText;
 
     private WaitForSeconds reloadFlashTime = new WaitForSeconds(0.25f);
-    private float _flashTime;
+    private bool _isLowHealth = false;
 
     public void UpdateAmmoCount(int currentAmmo, int maxAmmo, bool isEmpty = false)
     {
@@ -21,35 +23,72 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    /// <summary>
-    /// TO be added:
-    /// 1- Player Health bar
-    /// 2- Number of bullets
-    /// 3- Reload bar
-    /// 4- Current weapon
-    /// 
-    /// </summary>
-    // Start is called before the first frame update
     void Start()
     {
-        PlayerController.Instance.OnPlayerReload += Reloading;
+        Weapon.Instance.OnPlayerReload += Reloading;
         successPanel.gameObject.SetActive(false);
         failPanel.gameObject.SetActive(false);
-    }
-
-    public void EndGame(bool isSuccess)
-    {
-        successPanel.gameObject.SetActive(isSuccess);
-        failPanel.gameObject.SetActive(!isSuccess);
+        _currentHealthImg.sprite = healthImgs[0]; //green
     }
 
     public void UpdatePlayerHealth(int health)
     {
         float currentHealth = (float)health / 100;
-        Debug.Log("current health: " + currentHealth);
-        healthImg.fillAmount = (float)health/100;
+        switch(currentHealth)
+        {
+            case > .75f:
+                _currentHealthImg.sprite = healthImgs[0];
+                break;
+            case > .25f:
+                _currentHealthImg.sprite = healthImgs[1];
+                break;
+            case >.15f:
+                _currentHealthImg.sprite = healthImgs[2];
+                break;
+            default:
+                if(!_isLowHealth)
+                {
+                    StartCoroutine(HealthLowRoutine());
+                    _isLowHealth = true;
+                }
+                break;
+        }
+        _currentHealthImg.fillAmount = (float)health/100;
     }
 
+    public void UpdateEnemyCount(uint numberOfEnemiesAlive)
+    {
+        //this needs to change, not suitable for calling on each zombie death
+        _numberAliveText.text = "Zombies: " + numberOfEnemiesAlive.ToString();
+    }
+
+    public void UpdateWave(int waveIndex)
+    {
+        _currentWaveText.text = "Wave: " + waveIndex.ToString();
+    }
+
+    public void ChangeWeapon(string weaponName, bool isMelee)
+    {
+        _weaponText.text = weaponName;
+        if(!isMelee)
+        {
+            _ammoText.gameObject.SetActive(true);
+        }
+        else
+        {
+            _ammoText.gameObject.SetActive(false);
+        }
+    }
+
+    private void GameLost()
+    {
+        failPanel.gameObject.SetActive(true);
+    }
+
+    public void GameWon()
+    {
+        successPanel.gameObject.SetActive(true);
+    }
 
     private void Reloading()
     {
@@ -78,8 +117,27 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
+    IEnumerator HealthLowRoutine()
+    {
+        while(true)
+        {
+            //health up power up mechanic need to be added here.
+            _currentHealthImg.gameObject.SetActive(false);
+            yield return reloadFlashTime;
+            _currentHealthImg.gameObject.SetActive(true);
+            yield return reloadFlashTime;
+        }
+    }
+
+    private void OnEnable()
+    {
+        Weapon.Instance.OnPlayerReload += Reloading;
+        PlayerController.Instance.OnPlayerDeath += GameLost;
+    }
+
     private void OnDisable()
     {
-        PlayerController.Instance.OnPlayerReload -= Reloading;
+        Weapon.Instance.OnPlayerReload -= Reloading;
+        PlayerController.Instance.OnPlayerDeath -= GameLost;
     }
 }

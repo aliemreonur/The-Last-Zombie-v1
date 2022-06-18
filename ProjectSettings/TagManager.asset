@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Bullet
   - Environment
+  - Bat
+  - Zombie
   layers:
   - Default
   - TransparentFX

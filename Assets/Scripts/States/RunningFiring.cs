@@ -20,7 +20,7 @@ public class RunningFiring : BaseState
 
     public override void NormalUpdate()
     {
-        PlayerController.Instance.Fire();
+        Weapon.Instance.Fire();
         if (PlayerController.Instance.playerInput.Player.Fire.WasReleasedThisFrame())
         {
             if (PlayerController.Instance.playerInput.Player.Move.ReadValue<Vector2>() == Vector2.zero)

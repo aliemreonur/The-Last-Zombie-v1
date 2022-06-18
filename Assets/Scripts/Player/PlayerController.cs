@@ -6,79 +6,74 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : Singleton<PlayerController>
 {
-    [SerializeField] ParticleSystem _fireMuzzleEffect;
-    [SerializeField] Bullet _bullet;
-    [SerializeField] private float _speed;
-    [SerializeField] private float _fireRate = 0.25f;
-    [SerializeField] private Transform _gunPos;
-    //[SerializeField] private int _playerHealth;
-    [SerializeField] private int _clipSize = 14; //this will be updated with the weapons class - according to the weapon holding!
-    [SerializeField] private AudioClip _gunShotEffect, _reloadEffect;
+
+    [SerializeField] private float _speed = 3f;
+    [SerializeField] int _playerHealth = 100;
 
     public PlayerInputActions playerInput;
     public InputAction move, rotate;
 
-    public Action OnPlayerReload;
+    public Action OnPlayerDeath;
 
-
-    private AudioSource _audioSource;
-    private bool _isReloading;
-    private bool _canShoot = true;
-    private float _nextFire = 0;
-    private int _currentAmmo;
+    private float _initialSpeed; //this is for referencing the speed variable if it is changed via inspector.
     private Vector3 moveVector, lookVector = Vector3.zero;
-    private WaitForSeconds _reloadTime = new WaitForSeconds(2);
+    private WaitForSeconds playerHitSlowDown = new WaitForSeconds(2f);
 
     public bool IsAlive
     {
         get { return _isAlive; }
     }
 
+    public bool IsHit
+    {
+        get
+        {
+            return _isHit;
+        }
+        set
+        {
+            _isHit = value;
+        }
+    }
+
+    private bool _isHit;
     private bool _isAlive = true;
 
     public override void Awake()
     {
         base.Awake();
-        _audioSource = GetComponent<AudioSource>();
-        if(_audioSource == null)
-        {
-            Debug.LogError("The audio source of the palyer is null");
-        }
         playerInput = new PlayerInputActions();
-        _currentAmmo = _clipSize;
+        _initialSpeed = _speed;
     }
 
 
     void FixedUpdate()
     {
         Move();
-        //LookAt();
-        Reload();
-    }
+        LookAt();
 
-    public void Fire()
-    {
-        if (Time.time > _nextFire && _currentAmmo>0 && _canShoot)
+        if(playerInput.Player.Reload.IsPressed())
         {
-            if(_fireMuzzleEffect != null)
-            {
-                _fireMuzzleEffect.Play();
-            }
-            if(_gunShotEffect != null)
-            {
-                _audioSource.PlayOneShot(_gunShotEffect);
-            }
-            Bullet bullet = PoolManager.Instance.RequestBullet(transform.position + Vector3.up);
-            bullet.transform.rotation = _gunPos.transform.rotation;
-            _nextFire = Time.time + _fireRate;
-            _currentAmmo--;
-            UIManager.Instance.UpdateAmmoCount(_currentAmmo, _clipSize, _currentAmmo <= 0);
-            if (_currentAmmo <=0)
-            {
-                _isReloading = true;
-            }
+            Debug.Log("reload!");
         }
     }
+
+    public void Damage(int damageAmount)
+    {
+        _isHit = true;
+        if(_isHit)
+        {
+            StartCoroutine(PlayerHitRoutine());
+        }
+        _playerHealth -= damageAmount;
+        UIManager.Instance.UpdatePlayerHealth(_playerHealth);
+        if (_playerHealth <= 0 && _isAlive)
+        {
+            _isAlive = false;
+            OnPlayerDeath?.Invoke();
+        }
+    }
+
 
     private void Move()
     {
@@ -86,6 +81,7 @@ public class PlayerController : Singleton<PlayerController>
         {
             moveVector = new Vector3(move.ReadValue<Vector2>().x, 0, move.ReadValue<Vector2>().y);
 
+            //Rigidbody addforce was changed 
             transform.Translate(moveVector * _speed * Time.deltaTime, Space.World);
             transform.rotation = Quaternion.LookRotation(moveVector, Vector3.up);
         }
@@ -95,33 +91,11 @@ public class PlayerController : Singleton<PlayerController>
     {
         if(rotate.ReadValue<Vector2>() != Vector2.zero)
         {
-            lookVector = new Vector3(rotate.ReadValue<Vector2>().x, 0, rotate.ReadValue<Vector2>().y);
-            transform.rotation = Quaternion.LookRotation(lookVector, Vector3.up);
+           lookVector = new Vector3(rotate.ReadValue<Vector2>().x, 0, rotate.ReadValue<Vector2>().y);
+           transform.rotation = Quaternion.LookRotation(lookVector, Vector3.up);
         }
         
     }
-
-    private void Reload()
-    {
-        if((Input.GetKeyDown(KeyCode.R) || _isReloading) && _currentAmmo < _clipSize)
-        {
-            if(_reloadEffect != null)
-            {
-                _audioSource.PlayOneShot(_reloadEffect);
-            }
-            //use the new input system
-            _canShoot = false;
-            _isReloading = true;
-            OnPlayerReload?.Invoke();
-            StartCoroutine(ReloadRoutine());
-            _isReloading = false;
-        }
-        //Access the reloading fill image
-        //the coroutine image fill according to reload time
-        //On screen Reloading text flashing on and of
-        //only return hasreloaded to true if the reload has finished. 
-    }
-
 
     private void OnEnable()
     {
@@ -135,11 +109,11 @@ public class PlayerController : Singleton<PlayerController>
         playerInput.Player.Disable();
     }
 
-    IEnumerator ReloadRoutine()
+    IEnumerator PlayerHitRoutine()
     {
-        yield return _reloadTime;
-        _currentAmmo = _clipSize;
-        UIManager.Instance.UpdateAmmoCount(_currentAmmo, _clipSize, false);
-        _canShoot = true;
+        _isHit = false;
+        _speed = _initialSpeed / 4;
+        yield return playerHitSlowDown;
+        _speed = _initialSpeed;
     }
 }

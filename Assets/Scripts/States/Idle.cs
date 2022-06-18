@@ -10,16 +10,27 @@ public class Idle : BaseState
     {
         animator.SetBool("isRunning", false);
         animator.SetBool("isShooting", false);
+        animator.SetBool("isHitting", false);
         base.Enter();
     }
 
     public override void NormalUpdate()
     {
-        //this is with too many dots???
         if (PlayerController.Instance.playerInput.Player.Move.ReadValue<Vector2>() != Vector2.zero)
             stateMachine.ChangeState(stateMachine.runningState);
         if(PlayerController.Instance.playerInput.Player.Fire.WasPressedThisFrame())
-            stateMachine.ChangeState(stateMachine.firingState);
+        {
+            if(Weapon.Instance.IsMelee)
+            {
+                stateMachine.ChangeState(stateMachine.playerMeleeAttack);
+            }
+            else
+            {
+                stateMachine.ChangeState(stateMachine.firingState);
+            }
+
+        }
+
         base.NormalUpdate();
     }
 

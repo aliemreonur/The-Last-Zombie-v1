@@ -1,20 +1,20 @@
 ﻿<Properties StartupConfiguration="{9148630B-E3CC-8BDF-CFFE-07D111AA08A7}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Player/PlayerController.cs">
     <Files>
-      <File FileName="Assets/Scripts/States/PlayerSM.cs" Line="18" Column="47" />
-      <File FileName="Assets/Scripts/States/Enemy States/EnemyStateMachine.cs" />
-      <File FileName="Assets/Scripts/States/Enemy States/EnemyPatrol.cs" />
-      <File FileName="Assets/Scripts/Manager/SpawnManager.cs" />
-      <File FileName="Assets/Scripts/Enemy/Zombie.cs" Line="112" Column="14" />
-      <File FileName="Assets/Scripts/Enemy/ZombieAttack.cs" />
-      <File FileName="Assets/Scripts/States/Enemy States/EnemyAttacking.cs" />
-      <File FileName="Assets/Scripts/Shoot.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Player/PlayerController.cs" Line="100" Column="10" />
+      <File FileName="Assets/Scripts/States/Enemy States/EnemyStateMachine.cs" Line="84" Column="10" />
+      <File FileName="Assets/Scripts/Enemy/PlayerDetect.cs" Line="8" Column="1" />
+      <File FileName="Assets/Scripts/Manager/SpawnManager.cs" Line="36" Column="6" />
+      <File FileName="Assets/Scripts/Manager/UIManager.cs" Line="88" Column="26" />
+      <File FileName="Assets/Scripts/EndLevel.cs" Line="14" Column="75" />
+      <File FileName="Assets/Scripts/Manager/GameManager.cs" Line="9" Column="87" />
+      <File FileName="Assets/Scripts/Player/Weapon.cs" Line="29" Column="17" />
+      <File FileName="Assets/Scripts/Enemy/Zombie.cs" Line="111" Column="114" />
+      <File FileName="Assets/Scripts/Player/PlayerController.cs" Line="57" Column="34" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="b9fdd879-dfb4-496c-b3f6-4a4832106e2b" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="c35bc086-6fef-48eb-9a1b-16b9add794cd" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

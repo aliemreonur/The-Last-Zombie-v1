@@ -24,7 +24,7 @@ public class EnemyChasePlayer : EnemyState
         }
 
 
-        if (zombie.DistanceToPlayer() < 1.5f)
+        if (zombie.DistanceToPlayer() < 2.25f)
         {
             //Need a delay here before swwitching to attack state - a bug that makes the zombie move while attacking.
             enemyStateMachine.ChangeState(enemyStateMachine.enemyAttacking);

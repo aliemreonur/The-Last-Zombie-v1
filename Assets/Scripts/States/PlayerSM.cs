@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerSM : MonoBehaviour
@@ -8,6 +6,7 @@ public class PlayerSM : MonoBehaviour
     [HideInInspector] public Running runningState;
     [HideInInspector] public Firing firingState;
     [HideInInspector] public RunningFiring runFireState;
+    [HideInInspector] public PlayerMeleeAttack playerMeleeAttack;
 
     public Animator animator;
     BaseState currentState;
@@ -18,9 +17,8 @@ public class PlayerSM : MonoBehaviour
         runningState = new Running(this, animator);
         firingState = new Firing(this, animator);
         runFireState = new RunningFiring(this, animator);
-        //add the animator additional to this??
+        playerMeleeAttack = new PlayerMeleeAttack(this, animator);
     }
-
 
 
     void Start()
@@ -34,6 +32,10 @@ public class PlayerSM : MonoBehaviour
     {
         if (currentState != null)
             currentState.NormalUpdate();
+        if(!PlayerController.Instance.IsAlive)
+        {
+            animator.SetTrigger("isDead");
+        }
     }
 
     private void FixedUpdate()

@@ -18,13 +18,6 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector3.forward * _speed * Time.deltaTime);
     }
 
-    void DisableBullet()
-    {
-        
-     
-    
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Finish") || other.CompareTag("Environment"))

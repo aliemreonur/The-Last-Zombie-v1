@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerDetect : MonoBehaviour
 {
     private Zombie _zombie;
-    // Start is called before the first frame update
+
     void Start()
     {
         _zombie = GetComponentInParent<Zombie>();

@@ -6,23 +6,11 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     public bool IsRunning { get; private set; }
+    public int numberOfZombiesToFail = 5; //this will be tied to PlayerPrefs hardness!
 
-    /// <summary>
-    /// 1 - On Game Start
-    /// 2- On Game End -> Player death or success with
-    /// 3- 
-    /// </summary>
-
-    // Start is called before the first frame update
     void Start()
     {
         OnGameStart(); //this will be tied to a button or tap to screen!
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void OnGameStart()
@@ -31,37 +19,31 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 1;
     }
 
-    public void OnGameEnd(bool isSuccess)
+    public void ZombiePassed()
     {
-        IsRunning = false;
-        if(isSuccess)
+        numberOfZombiesToFail--;
+        if(numberOfZombiesToFail<=0)
         {
-            Debug.Log("next level");
-        }
-        else
-        {
-            Debug.Log("Restart Level");
+            OnGameFail();
         }
     }
 
-    private void StopTime()
+    public void OnGameFail()
     {
+        IsRunning = false;
         Time.timeScale = 0;
+    }
+
+
+    public void OnGameWon()
+    {
+        IsRunning = false;
+        UIManager.Instance.GameWon();
+        Time.timeScale = 0; 
     }
 
     public void ReloadLevel()
     {
         SceneManager.LoadScene(2);
     }
-
-    private void OnEnable()
-    {
-        EndLevel.OnSuccess += StopTime;
-    }
-
-    private void OnDisable()
-    {
-        EndLevel.OnSuccess -= StopTime;
-    }
-
 }

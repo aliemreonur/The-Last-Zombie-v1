@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f86792ad84fed48f492dc1d53dd306bb, type: 3}
+  m_Name: Bat
+  m_EditorClassIdentifier: 
+  weaponName: Bat
+  weaponId: 0
+  isMelee: 1
+  maxAmmo: 0
+  currentAmmo: 0
+  fireRate: 0.35
+  shotClip: {fileID: 8300000, guid: e75b9f7fb08c9401598e5c0e2ea1d4b9, type: 3}
+  reloadClip: {fileID: 0}
+  weaponSprite: {fileID: 0}

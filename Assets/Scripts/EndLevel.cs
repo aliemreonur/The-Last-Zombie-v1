@@ -5,15 +5,13 @@ using System;
 
 public class EndLevel : MonoBehaviour
 {
-    public static Action OnSuccess;
-
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Zombie"))
         {
-            UIManager.Instance.EndGame(true);
-            OnSuccess?.Invoke();
-            //Will update the UI Manager to load the necessary screen.
+            other.gameObject.SetActive(false);
+            GameManager.Instance.numberOfZombiesToFail--;
+            //need to tell the game that now we need to kill 1 less zombie
         }
     }
 }

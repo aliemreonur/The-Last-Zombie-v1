@@ -10,7 +10,7 @@ public class ZombieAttack : MonoBehaviour
         if(other.CompareTag("Player"))
         {
            
-            Player.Instance.Damage(5);
+            PlayerController.Instance.Damage(5);
             //this damage amount will be changed according to the difficulty level!
         }
     }

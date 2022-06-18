@@ -9,6 +9,7 @@ public class EnemyAttacking : EnemyState
 
     public override void Enter()
     {
+        navMeshAgent.agentTypeID = AgentType.GetAgenTypeIDByName("Zombie");
         base.Enter();
         zombie.IsAttacking = true;
         animator.SetBool("isAttacking", true);
@@ -21,7 +22,7 @@ public class EnemyAttacking : EnemyState
 
     public override void PhysicsUpdate()
     {
-        if(zombie.DistanceToPlayer() > 1.5f && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+        if(zombie.DistanceToPlayer() > 2.25f && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
         {
             enemyStateMachine.ChangeState(enemyStateMachine.enemyChasePlayer);
         }
@@ -31,9 +32,11 @@ public class EnemyAttacking : EnemyState
 
     public override void Exit()
     {
+        navMeshAgent.agentTypeID = 0;
         navMeshAgent.isStopped = false;
         zombie.IsAttacking = false;
         animator.SetBool("isAttacking", false);
+        //BETTER TO GET THESE INTO A METHOD
         base.Exit();
     }
 

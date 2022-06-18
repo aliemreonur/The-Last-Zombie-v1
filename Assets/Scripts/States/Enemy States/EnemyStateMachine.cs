@@ -5,10 +5,6 @@ using UnityEngine.AI;
 
 public class EnemyStateMachine : MonoBehaviour
 {
-    private NavMeshAgent _navMeshAgent;
-    private Animator _animator;
-    private EnemyState currentEnemyState;
-    private Zombie _zombie;
 
     [HideInInspector] public EnemyIdle enemyIdle;
     [HideInInspector] public EnemyPatrol enemyPatrol;
@@ -17,11 +13,14 @@ public class EnemyStateMachine : MonoBehaviour
     [HideInInspector] public EnemyDead enemyDead;
     [HideInInspector] public EnemyChasePlayer enemyChasePlayer;
 
-    private WaitForSeconds delayBeforePatrol = new WaitForSeconds(2f);
+    private NavMeshAgent _navMeshAgent;
+    private Animator _animator;
+    private EnemyState currentEnemyState;
+    private Zombie _zombie;
 
-    // Start is called before the first frame update
     void Awake()
     {
+   
         Initialize();
         enemyIdle = new EnemyIdle(_zombie, _navMeshAgent, _animator, this);
         enemyPatrol = new EnemyPatrol(_zombie, _navMeshAgent, _animator, this);
@@ -29,7 +28,6 @@ public class EnemyStateMachine : MonoBehaviour
         enemyHit = new EnemyHit(_zombie, _navMeshAgent, _animator, this);
         enemyDead = new EnemyDead(_zombie, _navMeshAgent, _animator, this);
         enemyChasePlayer = new EnemyChasePlayer(_zombie, _navMeshAgent, _animator, this);
-        //is it possible to use generic here??
     }
 
     private void Start()
@@ -41,7 +39,6 @@ public class EnemyStateMachine : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (currentEnemyState != null)
@@ -70,21 +67,22 @@ public class EnemyStateMachine : MonoBehaviour
         return enemyIdle;
     }
 
-    public void Delay() //this method is for delaying a non-monobehaviour script, inheriting enemy states.
+    private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(DelayForPatrolRoutine());
-    }
-
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Bullet"))
+        if (other.gameObject.CompareTag("Bullet") && _zombie.IsAlive)
         {
-            //PoolManager.Instance.RequestBloodEffect(other.GetContact(0).point);
-            BloodEffect bloodEffect= PoolManager.Instance.RequestBloodEffect(other.transform.position);
-            bloodEffect.transform.parent = transform;
-            other.gameObject.SetActive(false);
+            BloodEffect bloodEffect = PoolManager.Instance.RequestBloodEffect(other.transform.position);
+            if(bloodEffect != null)
+            {
+                bloodEffect.transform.parent = transform;
+                other.gameObject.SetActive(false);
+            }
             _zombie.Damage();
+        }
+
+        else if (other.gameObject.CompareTag("Bat"))
+        {
+            _zombie.Damage(true);
         }
     }
 
@@ -106,12 +104,6 @@ public class EnemyStateMachine : MonoBehaviour
         {
             Debug.LogError("The Enemystate could not get its zombie script");
         }
-
-    }
-
-    private void OnEnable()
-    {
-        EndLevel.OnSuccess += OnGameEnd;
     }
 
     private void OnGameEnd()
@@ -120,19 +112,4 @@ public class EnemyStateMachine : MonoBehaviour
         _navMeshAgent.speed = 0;
     }
 
-    private void OnDisable()
-    {
-        EndLevel.OnSuccess -= OnGameEnd;
-    }
-
-    IEnumerator DelayForPatrolRoutine()
-    {
-        yield return delayBeforePatrol;
-    }
-
-    private void OnGUI()
-    {
-        string content = currentEnemyState != null ? currentEnemyState.name : "(no current state)";
-        GUILayout.Label($"<color='black'><size=40>{content}</size></color>");
-    }
 }

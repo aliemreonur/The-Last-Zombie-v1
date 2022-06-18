@@ -1,25 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class SpawnManager : Singleton<SpawnManager>
 {
+    [SerializeField] private List<Wave> _waves = new List<Wave>();
     [SerializeField] private Zombie _zombiePrefab;
-    [SerializeField] private int numberToSpawn = 50;
     [SerializeField] Transform spawnPositionStartRight, spawnPositionEndLeft; //THESE VARIABLES ARE NOT SUITABLE FOR AUTOMATED LEVEL GENERATION! NEEDS MANUAL ADJUSTMENT
 
-    public float posXRightEdge, posXLeftEdge, posZStart, posZEnd;
-    //CHANGE THE UNDERLINE FOR PUBLIC
+    public Action OnGameWon;
 
-    /// <summary>
-    /// if Auto spawn to be created, I must make sure that obstacles and zombies do not spawn on each other.
-    /// 
-    /// </summary>
+    public float posXRightEdge, posXLeftEdge, posZStart, posZEnd;
+    public uint currentAlive;
+
+    private uint _numberSpawned;
+    private int numberToSpawn;
+    private int _currentWaveIndex;
+    private WaitForSeconds timeBtwWaves = new WaitForSeconds(5f);
+    private bool _wavesFinished;
 
     void Start()
     {
-        GetSpawnLimitPoints();
-        Spawn();
+        GetSpawnLimitPoints(); //this will be depreciated
+        StartCoroutine(WaveRoutine());
         //multiply the number to spawn according to difficulty level in options.
     }
 
@@ -29,16 +33,47 @@ public class SpawnManager : Singleton<SpawnManager>
         posXRightEdge = spawnPositionStartRight.position.x;
         posZStart = spawnPositionStartRight.position.z;
         posZEnd = spawnPositionEndLeft.position.z;
-        //random x: is between start right and end left
-        //random z: 
     }
 
-    private void Spawn()
+    IEnumerator WaveRoutine()
     {
-        for(int i =0; i<numberToSpawn; i++)
+        while(PlayerController.Instance.IsAlive && !_wavesFinished) //+the number of zombies to spawn is not over
         {
-            Vector3 posToSpawn = new Vector3(Random.Range(posXLeftEdge, posXRightEdge), 0.1f, Random.Range(posZStart, posZEnd));
-            Instantiate(_zombiePrefab, posToSpawn, Quaternion.Euler(Random.Range(0,360), Random.Range(0,360), Random.Range(0,360)), transform);
+            Wave currentWave = _waves[_currentWaveIndex];
+            UIManager.Instance.UpdateWave(_currentWaveIndex +1);
+            numberToSpawn = currentWave.numberToSpawn;
+            WaitForSeconds timeBtwSpawns = new WaitForSeconds(currentWave.spawnInterval);
+
+            if(_numberSpawned != numberToSpawn)
+            {
+                for (int i = 0; i < numberToSpawn; i++)
+                {
+                    _numberSpawned++;
+                    Vector3 posToSpawn = new Vector3(UnityEngine.Random.Range(posXLeftEdge, posXRightEdge), 0.1f, posZEnd);
+                    Zombie _spawnedZombie = Instantiate(_zombiePrefab, posToSpawn, Quaternion.Euler(0, 180, 0), transform); //better use the obj pool
+                    currentAlive++;
+                    yield return timeBtwSpawns;
+                    UIManager.Instance.UpdateEnemyCount(currentAlive);
+                }
+            }
+
+            if(currentAlive == 0)
+            {
+                if(_currentWaveIndex != _waves.Count - 1)
+                {
+                    yield return timeBtwWaves;
+                    numberToSpawn = 0;
+                    _numberSpawned = 0;
+                    _currentWaveIndex++;
+                }
+                else
+                {
+                    GameManager.Instance.OnGameWon();
+                }
+
+            }
+            yield return new WaitForSeconds(1f);
         }
+
     }
 }
