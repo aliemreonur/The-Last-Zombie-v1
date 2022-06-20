@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeWeapon",
+                    "type": "Button",
+                    "id": "48fd2224-6ea5-488b-866b-2e09b6dfd263",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -164,12 +173,45 @@
                 },
                 {
                     "name": "",
-                    "id": "3af5939e-ded6-478b-9988-4f8ccea664ac",
-                    "path": "<Touchscreen>/primaryTouch/tap",
-                    "interactions": "MultiTap",
+                    "id": "46c74213-792e-45b1-9745-d45f90404e1c",
+                    "path": "<iOSGameController>/buttonWest",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "303d9a35-32ab-4ab8-913f-e0422009250c",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d4d4bc5c-80d7-4e7c-8dfb-18d6a63a3731",
+                    "path": "<iOSGameController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2503b150-1e6b-47ed-889f-04e0f2246d46",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

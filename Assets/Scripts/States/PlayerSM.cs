@@ -7,6 +7,7 @@ public class PlayerSM : MonoBehaviour
     [HideInInspector] public Firing firingState;
     [HideInInspector] public RunningFiring runFireState;
     [HideInInspector] public PlayerMeleeAttack playerMeleeAttack;
+    [HideInInspector] public Dead playerDead;
 
     public Animator animator;
     BaseState currentState;
@@ -18,6 +19,7 @@ public class PlayerSM : MonoBehaviour
         firingState = new Firing(this, animator);
         runFireState = new RunningFiring(this, animator);
         playerMeleeAttack = new PlayerMeleeAttack(this, animator);
+        playerDead = new Dead(this, animator);
     }
 
 
@@ -32,10 +34,6 @@ public class PlayerSM : MonoBehaviour
     {
         if (currentState != null)
             currentState.NormalUpdate();
-        if(!PlayerController.Instance.IsAlive)
-        {
-            animator.SetTrigger("isDead");
-        }
     }
 
     private void FixedUpdate()
@@ -55,4 +53,28 @@ public class PlayerSM : MonoBehaviour
     {
         return idleState;
     }
+
+    private void PlayerDead()
+    {
+        ChangeState(playerDead);
+    }
+
+    private void EndZoneReached()
+    {
+        ChangeState(idleState);
+    }
+
+    private void OnEnable()
+    {
+        PlayerController.Instance.OnPlayerDeath += PlayerDead;
+        EndLevel.OnZombieReachedEndPoint += EndZoneReached;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.Instance.OnPlayerDeath -= PlayerDead;
+        EndLevel.OnZombieReachedEndPoint -= EndZoneReached;
+    }
+
+
 }

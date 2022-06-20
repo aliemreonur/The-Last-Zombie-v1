@@ -16,16 +16,16 @@ public class Firing : BaseState
 
     public override void NormalUpdate()
     {
-        Weapon.Instance.Fire();
+        WeaponController.Instance.Fire();
         if(PlayerController.Instance.playerInput.Player.Fire.WasReleasedThisFrame())
         {
-            if (PlayerController.Instance.playerInput.Player.Move.ReadValue<Vector2>() == Vector2.zero)
+            if (PlayerController.Instance.move.ReadValue<Vector2>() == Vector2.zero)
                 stateMachine.ChangeState(stateMachine.idleState);
             else
                 stateMachine.ChangeState(stateMachine.runningState);
         }
 
-        else if(PlayerController.Instance.playerInput.Player.Move.ReadValue<Vector2>() != Vector2.zero)
+        else if(PlayerController.Instance.move.ReadValue<Vector2>() != Vector2.zero)
         {
             stateMachine.ChangeState(stateMachine.runFireState);
         }

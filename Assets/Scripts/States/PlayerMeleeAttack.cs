@@ -12,10 +12,9 @@ public class PlayerMeleeAttack : BaseState
         base.Enter();
     }
 
-
     public override void NormalUpdate()
     {
-        Weapon.Instance.Fire();
+        WeaponController.Instance.Fire();
         if (PlayerController.Instance.playerInput.Player.Fire.WasReleasedThisFrame())
         {
             if (PlayerController.Instance.playerInput.Player.Move.ReadValue<Vector2>() == Vector2.zero)

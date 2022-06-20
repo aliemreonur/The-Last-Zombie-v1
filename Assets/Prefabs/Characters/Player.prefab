@@ -124,7 +124,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 984304774078971196}
   m_LocalRotation: {x: 0.14826088, y: -0, z: -0, w: 0.9889483}
-  m_LocalPosition: {x: 0, y: 3.92, z: -8.82}
+  m_LocalPosition: {x: 0, y: 3.92, z: 5.580001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1174,7 +1174,7 @@ GameObject:
   - component: {fileID: 2083176671441733344}
   - component: {fileID: 2083176671442830368}
   - component: {fileID: 984304774848779710}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: w_baseballbat
   m_TagString: Bat
   m_Icon: {fileID: 0}
@@ -1257,8 +1257,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 1.179475, y: 0.20961235, z: 0.18152983}
-  m_Center: {x: -0.28485388, y: 0.0011258586, z: 0.0016954275}
+  m_Size: {x: 1.2188067, y: 0.32577422, z: 0.32118917}
+  m_Center: {x: -0.30452016, y: -0.05695488, z: 0.071525104}
 --- !u!1 &2083176671440640786
 GameObject:
   m_ObjectHideFlags: 0
@@ -1268,7 +1268,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2083176671440930674}
-  - component: {fileID: 984304774109382718}
   - component: {fileID: 984304774109382712}
   - component: {fileID: 1243026342401120064}
   m_Layer: 7
@@ -1295,18 +1294,6 @@ Transform:
   m_Father: {fileID: 2083176671440930552}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &984304774109382718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2083176671440640786}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72372683170e54d62b284c7a4a05d253, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &984304774109382712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1319,11 +1306,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e90c85c601fa044369638faba39bd135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fireMuzzleEffect: {fileID: 7389463048700973267}
   weaponTypes:
   - {fileID: 11400000, guid: b3ceff109bc384ab1b3141a0fbc458d9, type: 2}
   - {fileID: 11400000, guid: 7b2d58394781048d8bcebd8c3c5c58e4, type: 2}
-  currentWeapon: {fileID: 0}
-  _fireMuzzleEffect: {fileID: 7389463048700973267}
 --- !u!82 &1243026342401120064
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1464,7 +1450,6 @@ GameObject:
   - component: {fileID: 2083176671431158074}
   - component: {fileID: 984304774335838414}
   - component: {fileID: 984304774335838408}
-  - component: {fileID: 3610498520286466386}
   - component: {fileID: 984304774335838411}
   - component: {fileID: 2083176671431158069}
   - component: {fileID: 2083176671431158068}
@@ -1545,18 +1530,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 2083176671431158074}
---- !u!114 &3610498520286466386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2083176671440640796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ddd515009cb24ff282818c3268f6e51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &984304774335838411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1569,14 +1542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45ae8c77f89de4750b8da91f505ad0f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gunPos: {fileID: 2617333842459719478}
-  _gunShotEffect: {fileID: 8300000, guid: a4b9bdd9db1224114b59ba8f446a64ad, type: 3}
-  _reloadEffect: {fileID: 8300000, guid: 8bc4279ba0ef340699d19c41f6c6d5ff, type: 3}
-  _fireMuzzleEffect: {fileID: 7389463048700973267}
-  _bullet: {fileID: 298990922321724623, guid: b8977ea1cc75a425d893c7aa457d3c10, type: 3}
   _speed: 3
-  _fireRate: 0.25
-  _clipSize: 14
   _playerHealth: 100
   move:
     m_Name: Move
@@ -1587,15 +1553,25 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  rotate:
-    m_Name: Rotate
+  reload:
+    m_Name: Reload
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 1d486b81-6b81-4f96-9874-d6220e346120
+    m_Id: ceaf39dd-5311-4e9d-ba0d-c348c4b2cfa8
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  changeWeapon:
+    m_Name: Change Weapon
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b8d6d188-258d-46f3-b17b-cc6d34c96f22
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  _isAlive: 1
 --- !u!136 &2083176671431158069
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6730,7 +6706,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:

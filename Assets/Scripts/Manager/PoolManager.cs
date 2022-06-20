@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class PoolManager : Singleton<PoolManager>
 {
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// 
     [SerializeField] private Bullet _bullet;
     [SerializeField] private BloodEffect _bloodEffect;
+    [SerializeField] private Zombie _zombie;
 
     public List<Bullet> bulletPool = new List<Bullet>();
     public List<BloodEffect> bloodEffectPool = new List<BloodEffect>();

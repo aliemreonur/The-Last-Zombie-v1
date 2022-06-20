@@ -3,6 +3,11 @@ using UnityEngine.AI;
 
 public static class AgentType
 {
+    /// <summary>
+    /// This class was being used for determining the agent type of a npc which is different than humanoid.
+    /// </summary>
+    /// <param name="agentTypeName"></param>
+    /// <returns></returns>
     public static int GetAgenTypeIDByName(string agentTypeName)
     {
         int count = NavMesh.GetSettingsCount();

@@ -20,7 +20,7 @@ public class Idle : BaseState
             stateMachine.ChangeState(stateMachine.runningState);
         if(PlayerController.Instance.playerInput.Player.Fire.WasPressedThisFrame())
         {
-            if(Weapon.Instance.IsMelee)
+            if(WeaponController.Instance.IsMelee)
             {
                 stateMachine.ChangeState(stateMachine.playerMeleeAttack);
             }

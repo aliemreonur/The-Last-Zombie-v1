@@ -1,20 +1,16 @@
 ﻿<Properties StartupConfiguration="{9148630B-E3CC-8BDF-CFFE-07D111AA08A7}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Player/PlayerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Manager/GameManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/States/Enemy States/EnemyStateMachine.cs" Line="84" Column="10" />
-      <File FileName="Assets/Scripts/Enemy/PlayerDetect.cs" Line="8" Column="1" />
-      <File FileName="Assets/Scripts/Manager/SpawnManager.cs" Line="36" Column="6" />
-      <File FileName="Assets/Scripts/Manager/UIManager.cs" Line="88" Column="26" />
-      <File FileName="Assets/Scripts/EndLevel.cs" Line="14" Column="75" />
-      <File FileName="Assets/Scripts/Manager/GameManager.cs" Line="9" Column="87" />
-      <File FileName="Assets/Scripts/Player/Weapon.cs" Line="29" Column="17" />
-      <File FileName="Assets/Scripts/Enemy/Zombie.cs" Line="111" Column="114" />
-      <File FileName="Assets/Scripts/Player/PlayerController.cs" Line="57" Column="34" />
+      <File FileName="Assets/Scripts/Player/WeaponController.cs" Line="18" Column="101" />
+      <File FileName="Assets/Scripts/Level/EndLevel.cs" Line="6" Column="38" />
+      <File FileName="Assets/Scripts/States/PlayerSM.cs" Line="48" Column="33" />
+      <File FileName="Assets/Scripts/States/Enemy States/EnemyStateMachine.cs" Line="124" Column="62" />
+      <File FileName="Assets/Scripts/Manager/GameManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="c35bc086-6fef-48eb-9a1b-16b9add794cd" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="ff9f8911-73cf-4549-ab49-262cc5ed7fd1" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -59,11 +59,11 @@
     <Compile Include="Assets/Scripts/AgentType.cs" />
     <Compile Include="Assets/Scripts/Enemy/ZombieAttack.cs" />
     <Compile Include="Assets/Scripts/States/Enemy States/EnemyState.cs" />
-    <Compile Include="Assets/Scripts/Wave.cs" />
+    <Compile Include="Assets/Scripts/Level/Wave.cs" />
     <Compile Include="Assets/Scripts/Options.cs" />
     <Compile Include="Assets/Scripts/Manager/SpawnManager.cs" />
     <Compile Include="Assets/Scripts/Player/Bullet.cs" />
-    <Compile Include="Assets/Scripts/Player/Weapon.cs" />
+    <Compile Include="Assets/Scripts/Player/WeaponController.cs" />
     <Compile Include="Assets/Scripts/States/PlayerMeleeAttack.cs" />
     <Compile Include="Assets/Scripts/Enemy/PlayerDetect.cs" />
     <Compile Include="Assets/Scripts/States/Enemy States/EnemyDead.cs" />
@@ -78,20 +78,21 @@
     <Compile Include="Assets/Scripts/Enemy/Zombie.cs" />
     <Compile Include="Assets/Scripts/PlayerInputActions.cs" />
     <Compile Include="Assets/Scripts/WeaponType.cs" />
+    <Compile Include="Assets/Scripts/Weapon.cs" />
     <Compile Include="Assets/Scripts/States/Enemy States/EnemyChasePlayer.cs" />
     <Compile Include="Assets/Scripts/States/Enemy States/EnemyAttacking.cs" />
     <Compile Include="Assets/Scripts/Enemy/BloodEffect.cs" />
-    <Compile Include="Assets/Scripts/Shoot.cs" />
     <Compile Include="Assets/Scripts/States/Idle.cs" />
     <Compile Include="Assets/Scripts/States/BaseState.cs" />
     <Compile Include="Assets/Scripts/Manager/GameManager.cs" />
     <Compile Include="Assets/Scripts/States/Enemy States/EnemyIdle.cs" />
     <Compile Include="Assets/Scripts/Manager/Singleton.cs" />
+    <Compile Include="Assets/Scripts/States/Dead.cs" />
     <Compile Include="Assets/Scripts/States/Firing.cs" />
     <Compile Include="Assets/Scripts/States/PlayerSM.cs" />
     <Compile Include="Assets/Scripts/MainMenu.cs" />
     <Compile Include="Assets/Scripts/Player/PlayerController.cs" />
-    <Compile Include="Assets/Scripts/EndLevel.cs" />
+    <Compile Include="Assets/Scripts/Level/EndLevel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

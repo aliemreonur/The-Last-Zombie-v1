@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.AI;
 
 public class PlayerController : Singleton<PlayerController>
 {
@@ -11,14 +12,17 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField] int _playerHealth = 100;
 
     public PlayerInputActions playerInput;
-    public InputAction move, rotate;
-
+    public InputAction move, reload, changeWeapon;
     public Action OnPlayerDeath;
 
     private float _initialSpeed; //this is for referencing the speed variable if it is changed via inspector.
-    private Vector3 moveVector, lookVector = Vector3.zero;
-    private WaitForSeconds playerHitSlowDown = new WaitForSeconds(2f);
+    private Vector3 _moveVector, _lookVector = Vector3.zero;
+    private WaitForSeconds _playerHitSlowDown = new WaitForSeconds(2f);
+    private bool _isHit;
+    private NavMeshAgent _navMeshAgent;
+    [SerializeField] private bool _isAlive = true;
 
+    #region Properties
     public bool IsAlive
     {
         get { return _isAlive; }
@@ -35,33 +39,25 @@ public class PlayerController : Singleton<PlayerController>
             _isHit = value;
         }
     }
+    #endregion
 
-    private bool _isHit;
-    private bool _isAlive = true;
 
     public override void Awake()
     {
         base.Awake();
         playerInput = new PlayerInputActions();
-        _initialSpeed = _speed;
-    }
-
-
-    void FixedUpdate()
-    {
-        Move();
-        LookAt();
-
-        if(playerInput.Player.Reload.IsPressed())
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+        if(_navMeshAgent == null)
         {
-            Debug.Log("reload!");
+            Debug.LogError("The navmesh agent is null");
         }
+        _initialSpeed = _speed;
     }
 
     public void Damage(int damageAmount)
     {
         _isHit = true;
-        if(_isHit)
+        if (_isHit)
         {
             StartCoroutine(PlayerHitRoutine());
         }
@@ -71,49 +67,50 @@ public class PlayerController : Singleton<PlayerController>
         {
             _isAlive = false;
             OnPlayerDeath?.Invoke();
+            _speed = 0;
         }
     }
 
+    void FixedUpdate()
+    {
+        Move();
+    }
 
     private void Move()
     {
-        if (move.ReadValue<Vector2>() != Vector2.zero)
+        if (move.ReadValue<Vector2>() != Vector2.zero && _isAlive)
         {
-            moveVector = new Vector3(move.ReadValue<Vector2>().x, 0, move.ReadValue<Vector2>().y);
-
-            //Rigidbody addforce was changed 
-            transform.Translate(moveVector * _speed * Time.deltaTime, Space.World);
-            transform.rotation = Quaternion.LookRotation(moveVector, Vector3.up);
+            _moveVector = new Vector3(move.ReadValue<Vector2>().x, 0, move.ReadValue<Vector2>().y);
+            _navMeshAgent.Move(_moveVector * _speed * Time.deltaTime);
+            transform.rotation = Quaternion.LookRotation(_moveVector, Vector3.up);
         }
     }
 
-    private void LookAt()
+    private void OnGameFail()
     {
-        if(rotate.ReadValue<Vector2>() != Vector2.zero)
-        {
-           lookVector = new Vector3(rotate.ReadValue<Vector2>().x, 0, rotate.ReadValue<Vector2>().y);
-           transform.rotation = Quaternion.LookRotation(lookVector, Vector3.up);
-        }
-        
+        _speed = 0;
     }
 
     private void OnEnable()
     {
+        EndLevel.OnZombieReachedEndPoint += OnGameFail;
         playerInput.Player.Enable();
         move = playerInput.Player.Move;
-        rotate = playerInput.Player.Rotate;
+        reload = playerInput.Player.Reload;
+        changeWeapon = playerInput.Player.ChangeWeapon;
     }
 
     private void OnDisable()
     {
         playerInput.Player.Disable();
+        EndLevel.OnZombieReachedEndPoint -= OnGameFail;
     }
 
     IEnumerator PlayerHitRoutine()
     {
         _isHit = false;
         _speed = _initialSpeed / 4;
-        yield return playerHitSlowDown;
+        yield return _playerHitSlowDown;
         _speed = _initialSpeed;
     }
 }

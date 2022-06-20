@@ -87,7 +87,7 @@ public class Zombie : MonoBehaviour
         {
             if (isMelee && !_isHit)
             {
-                Weapon.Instance.MeleeHit();
+                WeaponController.Instance.MeleeHit();
             }
             _isHit = true;
             StartCoroutine(ResetHitRoutine());

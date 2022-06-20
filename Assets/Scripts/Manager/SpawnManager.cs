@@ -12,7 +12,7 @@ public class SpawnManager : Singleton<SpawnManager>
     public Action OnGameWon;
 
     public float posXRightEdge, posXLeftEdge, posZStart, posZEnd;
-    public uint currentAlive;
+    public int currentAlive;
 
     private uint _numberSpawned;
     private int numberToSpawn;
@@ -22,13 +22,14 @@ public class SpawnManager : Singleton<SpawnManager>
 
     void Start()
     {
-        GetSpawnLimitPoints(); //this will be depreciated
+        GetSpawnLimitPoints(); 
         StartCoroutine(WaveRoutine());
         //multiply the number to spawn according to difficulty level in options.
     }
 
     private void GetSpawnLimitPoints()
     {
+        //this should be handled on a seperate class!
         posXLeftEdge = spawnPositionEndLeft.position.x;
         posXRightEdge = spawnPositionStartRight.position.x;
         posZStart = spawnPositionStartRight.position.z;
