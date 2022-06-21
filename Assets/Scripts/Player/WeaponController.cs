@@ -38,34 +38,47 @@ public class WeaponController : Singleton<WeaponController>
         _currentWeaponId = 1;
         _currentWeapon.currentAmmo = _currentWeapon.maxAmmo;
         _currentAmmo = _currentWeapon.currentAmmo;
-        PlayerController.Instance.changeWeapon.performed += ChangeWeapon_performed;
-     
+        PlayerController.Instance.changeWeapon.performed += OnChangeWeapon;
+        PlayerController.Instance.reload.performed += OnReload;
     }
 
-
-    private void ChangeWeapon_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    #region Reload
+    private void OnReload(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        if (PlayerController.Instance.changeWeapon.IsPressed())
+        if (GameManager.Instance.IsRunning)
         {
-            bool nextWeapon = _currentWeaponId + 1 < weaponTypes.Length ? true : false;
-
-            if(nextWeapon)
-            {
-                _currentWeaponId++;
-            }
-            else
-            {
-                _currentWeaponId--;
-            }
-            ChangeWeapon(_currentWeaponId);
-            if(!_currentWeapon.isMelee)
-            {
-                UIManager.Instance.UpdateAmmoCount(_currentAmmo, _maxAmmo, false);
-            }
+            Reload();
         }
-
     }
 
+    private void Reload()
+    {
+        if (((_currentAmmo < _maxAmmo)) && !_isReloading && !_isMelee) //TOO MANY CONDITIONS!!
+        {
+            //better to update to method callback system
+            _isReloading = true;
+            if (_currentWeapon.reloadClip != null)
+            {
+                _audioSource.PlayOneShot(_currentWeapon.reloadClip);
+            }
+            _canShoot = false;
+            OnPlayerReload?.Invoke();
+            StartCoroutine(ReloadRoutine());
+        }
+    }
+
+    IEnumerator ReloadRoutine()
+    {
+        yield return _reloadTime;
+        _currentAmmo = _maxAmmo;
+        UIManager.Instance.UpdateAmmoCount(_currentAmmo, _maxAmmo, false);
+        _isReloading = false;
+        _canShoot = true;
+    }
+
+    #endregion
+
+    #region Action
     public void MeleeHit()
     {
         if (_currentWeapon.shotClip != null)
@@ -100,27 +113,30 @@ public class WeaponController : Singleton<WeaponController>
             _nextFire = Time.time + _fireRate;
         }
     }
+    #endregion
 
-    void Update()
+    #region WeaponChange
+    private void OnChangeWeapon(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        Reload();
-    }
-
-    private void Reload()
-    {
-        if (((PlayerController.Instance.reload.IsPressed() && !_isReloading && _currentAmmo < _maxAmmo) || _currentAmmo <= 0) && !_isReloading && !_isMelee) //TOO MANY CONDITIONS!!
+        if (PlayerController.Instance.changeWeapon.IsPressed())
         {
-            Debug.Log("Reload");
-            //better to update to method callback system
-            _isReloading = true;
-            if (_currentWeapon.reloadClip != null)
+            bool nextWeapon = _currentWeaponId + 1 < weaponTypes.Length ? true : false;
+
+            if (nextWeapon)
             {
-                _audioSource.PlayOneShot(_currentWeapon.reloadClip);
+                _currentWeaponId++;
             }
-            _canShoot = false;
-            OnPlayerReload?.Invoke();
-            StartCoroutine(ReloadRoutine());
-        } 
+            else
+            {
+                _currentWeaponId--;
+            }
+            ChangeWeapon(_currentWeaponId);
+            if (!_currentWeapon.isMelee)
+            {
+                UIManager.Instance.UpdateAmmoCount(_currentAmmo, _maxAmmo, false);
+            }
+        }
+
     }
 
     private void ChangeWeapon(int id)
@@ -147,13 +163,6 @@ public class WeaponController : Singleton<WeaponController>
         Debug.Log("Setted the current ammo to: " + _currentAmmo + "weapon ammo: " + _currentWeapon.currentAmmo);
         UIManager.Instance.ChangeWeapon(_currentWeapon.name, _currentWeapon.isMelee);
     }
+    #endregion
 
-    IEnumerator ReloadRoutine()
-    {
-        yield return _reloadTime;
-        _currentAmmo = _maxAmmo;
-        UIManager.Instance.UpdateAmmoCount(_currentAmmo, _maxAmmo, false);
-        _isReloading = false;
-        _canShoot = true;
-    }
 }

@@ -73,7 +73,7 @@ public class Zombie : MonoBehaviour
 
     #endregion
 
-
+    #region Methods
     private void Start()
     {
         HealthBarActive(false);
@@ -81,9 +81,9 @@ public class Zombie : MonoBehaviour
         _maxZHealth = _zHealth;
     }
 
-    public void Damage(bool isMelee=false)
+    public void Damage(bool isMelee = false)
     {
-        if(_zHealth >0)
+        if (_zHealth > 0)
         {
             if (isMelee && !_isHit)
             {
@@ -97,8 +97,8 @@ public class Zombie : MonoBehaviour
             StartCoroutine(ResetHealthBarRoutine());
             if (_zHealth == 0)
             {
-                SpawnManager.Instance.currentAlive--;
-                UIManager.Instance.UpdateEnemyCount(SpawnManager.Instance.currentAlive); //This will be changed.
+                WaveManager.Instance.currentAlive--;
+                UIManager.Instance.UpdateEnemyCount(WaveManager.Instance.currentAlive); //This will be changed.
                 Invoke("DisableZombie", 3f);
             }
         }
@@ -126,7 +126,7 @@ public class Zombie : MonoBehaviour
 
     IEnumerator ResetHitRoutine()
     {
-        if(_isHit)
+        if (_isHit)
         {
             yield return hitResetTime;
             _isHit = false;
@@ -138,5 +138,5 @@ public class Zombie : MonoBehaviour
         yield return healthBarResetTime;
         HealthBarActive(false);
     }
-
+    #endregion
 }

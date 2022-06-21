@@ -106,7 +106,7 @@ public class EnemyStateMachine : MonoBehaviour
         }
     }
 
-    private void OnGameEnd()
+    private void GameEnd()
     {
         ChangeState(enemyIdle);
         _navMeshAgent.speed = 0;
@@ -114,13 +114,11 @@ public class EnemyStateMachine : MonoBehaviour
 
     private void OnEnable()
     {
-        EndLevel.OnZombieReachedEndPoint += OnGameEnd;
-        PlayerController.Instance.OnPlayerDeath += OnGameEnd;
+        GameManager.Instance.OnGameEnd += GameEnd;
     }
 
     private void OnDisable()
     {
-        EndLevel.OnZombieReachedEndPoint -= OnGameEnd;
-        PlayerController.Instance.OnPlayerDeath -= OnGameEnd;
+        GameManager.Instance.OnGameEnd -= GameEnd;
     }
 }

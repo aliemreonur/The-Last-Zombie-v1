@@ -6,35 +6,33 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    //public bool IsRunning { get; private set; }
+    public bool IsRunning { get; private set; }
+    public Action OnGameEnd;
 
     private void OnEnable()
     {
-        PlayerController.Instance.OnPlayerDeath += OnGameFail;
         Time.timeScale = 0;
+    }
+
+    public void EndGame(bool isSuccess)
+    {
+        IsRunning = false;
+        OnGameEnd?.Invoke();
+        if (isSuccess)
+            UIManager.Instance.GameWon();
+        else
+            UIManager.Instance.GameLost();
     }
 
     public void OnGameStart()
     {
+        IsRunning = true;
         Time.timeScale = 1;
-    }
-
-    public void OnGameFail()
-    {
-        UIManager.Instance.GameLost();
-    }
-
-
-    public void OnGameWon()
-    {
-        UIManager.Instance.GameWon();
-        Time.timeScale = 0; 
     }
 
     public void ReloadLevel()
     {
         SceneManager.LoadScene(2);
     }
-
     
 }

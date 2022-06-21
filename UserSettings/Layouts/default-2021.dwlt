@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1280
     height: 688
   m_ShowMode: 4
-  m_Title: Console
+  m_Title: Simulator
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 45
+  controlID: 30
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 92
+  controlID: 31
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: SimulatorWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -193,15 +193,15 @@ MonoBehaviour:
     y: 330
     width: 652
     height: 308
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 17}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 17}
   - {fileID: 18}
   - {fileID: 14}
-  m_Selected: 0
-  m_LastSelected: 2
+  m_Selected: 2
+  m_LastSelected: 0
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 46
+  controlID: 62
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -298,8 +298,8 @@ MonoBehaviour:
     y: 0
     width: 359
     height: 638
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
@@ -1365,7 +1365,7 @@ MonoBehaviour:
   m_UseMipMap: 0
   m_SimulatorState:
     controlPanelVisible: 0
-    controlPanelWidth: NaN
+    controlPanelWidth: 0
     controlPanelFoldoutKeys:
     - UnityEditor.DeviceSimulation.ApplicationSettingsPlugin
     controlPanelFoldoutValues: 00
@@ -1375,7 +1375,7 @@ MonoBehaviour:
     pluginStates:
     - '{}'
     - '{}'
-    scale: 10
+    scale: 32
     fitToScreenEnabled: 1
     rotationDegree: 270
     highlightSafeAreaEnabled: 0
@@ -1607,9 +1607,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 12.72291, y: 19.981094, z: 78.41112}
+    m_Target: {x: -7.525509, y: 23.374725, z: 28.498775}
     speed: 2
-    m_Value: {x: 12.72291, y: 19.981094, z: 78.41112}
+    m_Value: {x: -7.525509, y: 23.374725, z: 28.498775}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1656,13 +1656,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.018806722, y: -0.9800579, z: 0.16168207, w: 0.11399735}
+    m_Target: {x: 0.11302508, y: 0.19393785, z: -0.022500338, w: 0.97422135}
     speed: 2
-    m_Value: {x: 0.018806688, y: -0.98005617, z: 0.16168179, w: 0.11399715}
+    m_Value: {x: 0.11302508, y: 0.19393785, z: -0.022500338, w: 0.97422135}
   m_Size:
-    m_Target: 9.229664
+    m_Target: 24.851116
     speed: 2
-    m_Value: 9.229664
+    m_Value: 24.851116
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1826,7 +1826,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -2276
+  m_LastSelectedObjectID: 25366
 --- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1857,24 +1857,24 @@ MonoBehaviour:
     m_SaveData: []
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 109.36046}
-      m_SelectedIDs: 1cf7ffff
-      m_LastClickedID: -2276
-      m_ExpandedIDs: 80d7ffff88d7ffff8cd7ffffa0d7ffffccd7ffffd8d7ffffe8d7ffff06deffff02e4ffff0ae4ffff0ee4ffff22e4ffff4ee4ffff5ae4ffff42e6ffff08f7ffff1cf7ffff20f7ffff24f7ffff28f7ffff2cf7ffff58f7ffff84f7ffff8ef7ffff9cf7ffff16faffff6afaffff94faffffe8faffff14fbffffae5f0000a0600000e46100005c6200009662000034660000d2670000f2680000
+      scrollPos: {x: 0, y: 1215.5}
+      m_SelectedIDs: 5c6f0000
+      m_LastClickedID: 0
+      m_ExpandedIDs: a4b5ffff20f7ffff24f7ffff28f7ffff2cf7ffff58f7ffff84f7ffff8ef7ffff9cf7ffff14fbffff9c600000ac600000586200001464000030660000ee680000140c010092110100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Zombie(Clone)
-        m_OriginalName: Zombie(Clone)
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -14216
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 10}
       m_SearchString: 
@@ -1925,7 +1925,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Audio
+    - Assets/Prefabs/Characters
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 0
@@ -1939,7 +1939,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: e6490000
     m_LastClickedID: 18918
-    m_ExpandedIDs: 000000001a7000001e7000002e7000003070000032700000347000003a70000086700000887000002a71000076730000787300007a7300007c7300007e73000080730000827300008473000086730000887300008a7300008c7300008e73000090730000927300009473000096730000987300009a7300009c7300009e730000a0730000a2730000a4730000a6730000a8730000aa730000ac730000ae730000b0730000b2730000b4730000b6730000b8730000ba730000bc730000be730000c0730000c2730000c4730000c6730000c8730000ca730000cc730000ce730000d0730000d2730000d4730000d6730000d8730000da730000dc730000de730000e0730000
+    m_ExpandedIDs: 000000001a7000001e7000002e7000003070000032700000347000003a70000086700000887000002a710000727300007473000076730000787300007a7300007c7300007e73000080730000827300008473000086730000887300008a7300008c7300008e73000090730000927300009473000096730000987300009a7300009c7300009e730000a0730000a2730000a4730000a6730000a8730000aa730000ac730000ae730000b0730000b2730000b4730000b6730000b8730000ba730000bc730000be730000c0730000c2730000c4730000c6730000c8730000ca730000cc730000ce730000d0730000d2730000d4730000d6730000d8730000da730000dc730000de730000e0730000e2730000e4730000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1964,26 +1964,26 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 217.57874}
+    scrollPos: {x: 0, y: 431.5}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff000000001a7000001e7000002e7000003070000032700000347000003a70000086700000887000002a71000076730000787300007a7300007c7300007e73000080730000827300008473000086730000887300008a7300008c7300008e73000090730000927300009473000096730000987300009a7300009c7300009e730000a0730000a2730000a4730000a6730000a8730000aa730000ac730000ae730000b0730000b2730000b4730000b6730000b8730000ba730000bc730000be730000c0730000c2730000c4730000c8730000ca730000cc730000ce730000d0730000d2730000d6730000d8730000da730000dc730000de730000e073000014740000167400002a7400005c90000096920000
+    m_ExpandedIDs: ffffffff000000001a7000001e7000002e7000003070000032700000347000003a70000086700000887000002a710000727300007473000076730000787300007a7300007c7300007e73000080730000827300008473000086730000887300008a7300008c7300008e73000090730000927300009473000096730000987300009a7300009c7300009e730000a0730000a2730000a4730000a6730000a8730000aa730000ac730000ae730000b0730000b2730000b4730000b6730000b8730000ba730000bc730000be730000c0730000c2730000c4730000c6730000c8730000ca730000cc730000ce730000d0730000d2730000d4730000d6730000d8730000da730000dc730000de730000e0730000e2730000e4730000d48c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Player
-      m_OriginalName: Player
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 28578
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 11}
+      m_ClientGUIView: {fileID: 0}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}

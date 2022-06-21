@@ -47,7 +47,7 @@ public class EnemyPatrol : EnemyState
     {
         if(!isMoving)
         {
-            pointToMove = new Vector3(Random.Range(SpawnManager.Instance.posXLeftEdge, SpawnManager.Instance.posXRightEdge), 0, SpawnManager.Instance.posZStart);
+            pointToMove = new Vector3(Random.Range(WaveManager.Instance.posXLeftEdge, WaveManager.Instance.posXRightEdge), 0, WaveManager.Instance.posZStart);
             isMoving = true;
         }
 

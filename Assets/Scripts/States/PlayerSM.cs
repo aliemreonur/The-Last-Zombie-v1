@@ -54,26 +54,26 @@ public class PlayerSM : MonoBehaviour
         return idleState;
     }
 
-    private void PlayerDead()
+    private void EndGame()
     {
-        ChangeState(playerDead);
-    }
-
-    private void EndZoneReached()
-    {
-        ChangeState(idleState);
+        if(PlayerController.Instance.IsAlive)
+        {
+            ChangeState(idleState);
+        }
+        else
+        {
+            ChangeState(playerDead);
+        }
     }
 
     private void OnEnable()
     {
-        PlayerController.Instance.OnPlayerDeath += PlayerDead;
-        EndLevel.OnZombieReachedEndPoint += EndZoneReached;
+        GameManager.Instance.OnGameEnd += EndGame;
     }
 
     private void OnDisable()
     {
-        PlayerController.Instance.OnPlayerDeath -= PlayerDead;
-        EndLevel.OnZombieReachedEndPoint -= EndZoneReached;
+        GameManager.Instance.OnGameEnd -= EndGame;
     }
 
 

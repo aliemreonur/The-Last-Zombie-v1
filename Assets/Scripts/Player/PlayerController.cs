@@ -13,10 +13,9 @@ public class PlayerController : Singleton<PlayerController>
 
     public PlayerInputActions playerInput;
     public InputAction move, reload, changeWeapon;
-    public Action OnPlayerDeath;
 
-    private float _initialSpeed; //this is for referencing the speed variable if it is changed via inspector.
-    private Vector3 _moveVector, _lookVector = Vector3.zero;
+    private float _initialSpeed;
+    private Vector3 _moveVector;
     private WaitForSeconds _playerHitSlowDown = new WaitForSeconds(2f);
     private bool _isHit;
     private NavMeshAgent _navMeshAgent;
@@ -41,7 +40,7 @@ public class PlayerController : Singleton<PlayerController>
     }
     #endregion
 
-
+    #region Methods
     public override void Awake()
     {
         base.Awake();
@@ -66,14 +65,14 @@ public class PlayerController : Singleton<PlayerController>
         if (_playerHealth <= 0 && _isAlive)
         {
             _isAlive = false;
-            OnPlayerDeath?.Invoke();
-            _speed = 0;
+            GameManager.Instance.EndGame(false);
         }
     }
 
     void FixedUpdate()
     {
-        Move();
+        if(GameManager.Instance.IsRunning)
+            Move();
     }
 
     private void Move()
@@ -86,14 +85,8 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
-    private void OnGameFail()
-    {
-        _speed = 0;
-    }
-
     private void OnEnable()
     {
-        EndLevel.OnZombieReachedEndPoint += OnGameFail;
         playerInput.Player.Enable();
         move = playerInput.Player.Move;
         reload = playerInput.Player.Reload;
@@ -103,7 +96,6 @@ public class PlayerController : Singleton<PlayerController>
     private void OnDisable()
     {
         playerInput.Player.Disable();
-        EndLevel.OnZombieReachedEndPoint -= OnGameFail;
     }
 
     IEnumerator PlayerHitRoutine()
@@ -113,4 +105,6 @@ public class PlayerController : Singleton<PlayerController>
         yield return _playerHitSlowDown;
         _speed = _initialSpeed;
     }
+
+    #endregion
 }

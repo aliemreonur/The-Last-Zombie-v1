@@ -14,9 +14,23 @@ public class UIManager : Singleton<UIManager>
     private WaitForSeconds _reloadFlashTime = new WaitForSeconds(0.25f);
     private bool _isLowHealth = false;
 
+    #region GameStart
+    private void OnEnable()
+    {
+        WeaponController.Instance.OnPlayerReload += Reloading;
+    }
+
     void Start()
     {
         Initialize();
+    }
+
+    private void Initialize()
+    {
+        _successPanel.gameObject.SetActive(false);
+        _failPanel.gameObject.SetActive(false);
+        _currentHealthImg.sprite = _healthImgs[0]; //green
+        CheckFirstTime();
     }
 
     public void PassWelcomeScreen()
@@ -27,6 +41,25 @@ public class UIManager : Singleton<UIManager>
         GameManager.Instance.OnGameStart();
     }
 
+    private void CheckFirstTime()
+    {
+        if (PlayerPrefs.HasKey("FirstTime5"))
+        {
+            int firstTime = PlayerPrefs.GetInt("FirstTime5");
+            if (firstTime == 0) // meaning that player has started the game before
+            {
+                _welcomePanel.gameObject.SetActive(false);
+                GameManager.Instance.OnGameStart();
+            }
+        }
+        else
+        {
+            _welcomePanel.gameObject.SetActive(true);
+        }
+    }
+    #endregion
+
+    #region ActiveGame
     public void UpdatePlayerHealth(int health)
     {
         float currentHealth = (float)health / 100;
@@ -77,43 +110,6 @@ public class UIManager : Singleton<UIManager>
             StartCoroutine(AmmoOutRoutine());
         }
     }
-
-    public void GameWon()
-    {
-        _successPanel.gameObject.SetActive(true);
-    }
-
-    public void GameLost()
-    {
-        _failPanel.gameObject.SetActive(true);
-    }
-
-    private void Initialize()
-    {
-        _successPanel.gameObject.SetActive(false);
-        _failPanel.gameObject.SetActive(false);
-        _currentHealthImg.sprite = _healthImgs[0]; //green
-        CheckFirstTime();
-    }
-
-    private void CheckFirstTime()
-    {
-        if (PlayerPrefs.HasKey("FirstTime5"))
-        {
-            int firstTime = PlayerPrefs.GetInt("FirstTime5");
-            if (firstTime == 0) // meaning that player has started the game before
-            {
-                _welcomePanel.gameObject.SetActive(false);
-                GameManager.Instance.OnGameStart();
-            }
-        }
-        else
-        {
-            _welcomePanel.gameObject.SetActive(true);
-        }
-    }
-
-
     private void Reloading()
     {
         StartCoroutine(ReloadRoutine());
@@ -152,16 +148,24 @@ public class UIManager : Singleton<UIManager>
             yield return _reloadFlashTime;
         }
     }
+    #endregion
 
-    private void OnEnable()
+    #region GameEnd
+    public void GameWon()
     {
-        WeaponController.Instance.OnPlayerReload += Reloading;
-        PlayerController.Instance.OnPlayerDeath += GameLost;
+        _successPanel.gameObject.SetActive(true);
     }
+
+    public void GameLost()
+    {
+        _failPanel.gameObject.SetActive(true);
+    }
+
 
     private void OnDisable()
     {
         WeaponController.Instance.OnPlayerReload -= Reloading;
-        PlayerController.Instance.OnPlayerDeath -= GameLost;
     }
+
+    #endregion
 }

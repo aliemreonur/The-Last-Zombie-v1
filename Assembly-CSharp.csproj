@@ -61,7 +61,7 @@
     <Compile Include="Assets/Scripts/States/Enemy States/EnemyState.cs" />
     <Compile Include="Assets/Scripts/Level/Wave.cs" />
     <Compile Include="Assets/Scripts/Options.cs" />
-    <Compile Include="Assets/Scripts/Manager/SpawnManager.cs" />
+    <Compile Include="Assets/Scripts/Manager/WaveManager.cs" />
     <Compile Include="Assets/Scripts/Player/Bullet.cs" />
     <Compile Include="Assets/Scripts/Player/WeaponController.cs" />
     <Compile Include="Assets/Scripts/States/PlayerMeleeAttack.cs" />
