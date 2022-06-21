@@ -7,66 +7,44 @@ using UnityEngine.AI;
 
 public class PlayerController : Singleton<PlayerController>
 {
-
     [SerializeField] private float _speed = 3f;
     [SerializeField] int _playerHealth = 100;
 
     public PlayerInputActions playerInput;
     public InputAction move, reload, changeWeapon;
 
+    private bool _isAlive = true;
     private float _initialSpeed;
     private Vector3 _moveVector;
     private WaitForSeconds _playerHitSlowDown = new WaitForSeconds(2f);
-    private bool _isHit;
     private NavMeshAgent _navMeshAgent;
-    [SerializeField] private bool _isAlive = true;
 
-    #region Properties
     public bool IsAlive
     {
         get { return _isAlive; }
     }
 
-    public bool IsHit
-    {
-        get
-        {
-            return _isHit;
-        }
-        set
-        {
-            _isHit = value;
-        }
-    }
-    #endregion
-
-    #region Methods
-    public override void Awake()
-    {
-        base.Awake();
-        playerInput = new PlayerInputActions();
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-        if(_navMeshAgent == null)
-        {
-            Debug.LogError("The navmesh agent is null");
-        }
-        _initialSpeed = _speed;
-    }
-
     public void Damage(int damageAmount)
     {
-        _isHit = true;
-        if (_isHit)
-        {
-            StartCoroutine(PlayerHitRoutine());
-        }
+        //_isHit = true;
+        StartCoroutine(PlayerHitRoutine());
         _playerHealth -= damageAmount;
-        UIManager.Instance.UpdatePlayerHealth(_playerHealth);
         if (_playerHealth <= 0 && _isAlive)
         {
             _isAlive = false;
             GameManager.Instance.EndGame(false);
         }
+        UIManager.Instance.UpdatePlayerHealth(_playerHealth);
+    }
+
+    private void Start()
+    {
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+        if (_navMeshAgent == null)
+        {
+            Debug.LogError("The navmesh agent is null");
+        }
+        _initialSpeed = _speed;
     }
 
     void FixedUpdate()
@@ -87,6 +65,7 @@ public class PlayerController : Singleton<PlayerController>
 
     private void OnEnable()
     {
+        playerInput = new PlayerInputActions();
         playerInput.Player.Enable();
         move = playerInput.Player.Move;
         reload = playerInput.Player.Reload;
@@ -100,11 +79,8 @@ public class PlayerController : Singleton<PlayerController>
 
     IEnumerator PlayerHitRoutine()
     {
-        _isHit = false;
         _speed = _initialSpeed / 4;
         yield return _playerHitSlowDown;
         _speed = _initialSpeed;
     }
-
-    #endregion
 }

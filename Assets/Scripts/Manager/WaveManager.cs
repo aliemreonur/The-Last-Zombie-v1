@@ -10,7 +10,6 @@ public class WaveManager : Singleton<WaveManager>
     [SerializeField] Transform spawnPositionStartRight, spawnPositionEndLeft; //THESE VARIABLES ARE NOT SUITABLE FOR AUTOMATED LEVEL GENERATION! NEEDS MANUAL ADJUSTMENT
 
     public Action OnGameWon;
-
     public float posXRightEdge, posXLeftEdge, posZStart, posZEnd;
     public int currentAlive;
 
@@ -20,7 +19,6 @@ public class WaveManager : Singleton<WaveManager>
     private WaitForSeconds timeBtwWaves = new WaitForSeconds(5f);
     private bool _wavesFinished;
 
-    #region Methods
     void Start()
     {
         GetSpawnLimitPoints(); 
@@ -30,7 +28,7 @@ public class WaveManager : Singleton<WaveManager>
 
     private void GetSpawnLimitPoints()
     {
-        //this should be handled on a seperate class!
+        //this can be handled on a seperate class!
         posXLeftEdge = spawnPositionEndLeft.position.x;
         posXRightEdge = spawnPositionStartRight.position.x;
         posZStart = spawnPositionStartRight.position.z;
@@ -52,7 +50,7 @@ public class WaveManager : Singleton<WaveManager>
                 {
                     _numberSpawned++;
                     Vector3 posToSpawn = new Vector3(UnityEngine.Random.Range(posXLeftEdge, posXRightEdge), 0.1f, posZEnd);
-                    Zombie _spawnedZombie = Instantiate(_zombiePrefab, posToSpawn, Quaternion.Euler(0, 180, 0), transform); //better use the obj pool
+                    PoolManager.Instance.RequestZombie(posToSpawn);
                     currentAlive++;
                     yield return timeBtwSpawns;
                     UIManager.Instance.UpdateEnemyCount(currentAlive);
@@ -72,11 +70,8 @@ public class WaveManager : Singleton<WaveManager>
                 {
                     GameManager.Instance.EndGame(true);
                 }
-
             }
             yield return new WaitForSeconds(1f);
         }
-
     }
-    #endregion
 }

@@ -9,7 +9,6 @@ public class EnemyAttacking : EnemyState
 
     public override void Enter()
     {
-        navMeshAgent.agentTypeID = AgentType.GetAgenTypeIDByName("Zombie");
         base.Enter();
         zombie.IsAttacking = true;
         animator.SetBool("isAttacking", true);
@@ -32,11 +31,8 @@ public class EnemyAttacking : EnemyState
 
     public override void Exit()
     {
-        navMeshAgent.agentTypeID = 0;
-        navMeshAgent.isStopped = false;
         zombie.IsAttacking = false;
         animator.SetBool("isAttacking", false);
-        //BETTER TO GET THESE INTO A METHOD
         base.Exit();
     }
 

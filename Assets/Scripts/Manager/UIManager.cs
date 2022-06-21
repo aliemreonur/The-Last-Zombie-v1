@@ -59,7 +59,7 @@ public class UIManager : Singleton<UIManager>
     }
     #endregion
 
-    #region ActiveGame
+    #region PlayerHealth
     public void UpdatePlayerHealth(int health)
     {
         float currentHealth = (float)health / 100;
@@ -84,24 +84,37 @@ public class UIManager : Singleton<UIManager>
         }
         _currentHealthImg.fillAmount = (float)health/100;
     }
+    IEnumerator HealthLowRoutine()
+    {
+        while (true)
+        {
+            //health up power up mechanic need to be added here.
+            _currentHealthImg.gameObject.SetActive(false);
+            yield return _reloadFlashTime;
+            _currentHealthImg.gameObject.SetActive(true);
+            yield return _reloadFlashTime;
+        }
+    }
+    #endregion
 
+    #region Wave
     public void UpdateEnemyCount(int numberOfEnemiesAlive)
     {
         _numberAliveText.text = "Zombies: " + numberOfEnemiesAlive.ToString();
     }
-
     public void UpdateWave(int waveIndex)
     {
         _currentWaveText.text = "Wave: " + waveIndex.ToString();
     }
+    #endregion
 
+    #region Weapon
     public void ChangeWeapon(string weaponName, bool isMelee)
     {
         _weaponText.text = weaponName;
         bool isAmmoOn = !isMelee;
         _ammoText.gameObject.SetActive(isAmmoOn);
     }
-
     public void UpdateAmmoCount(int currentAmmo, int maxAmmo, bool isEmpty = false)
     {
         _ammoText.text = currentAmmo + "/" + maxAmmo;
@@ -114,7 +127,6 @@ public class UIManager : Singleton<UIManager>
     {
         StartCoroutine(ReloadRoutine());
     }
-
     IEnumerator ReloadRoutine()
     {
         for(int i=0; i<4; i++)
@@ -125,7 +137,6 @@ public class UIManager : Singleton<UIManager>
             yield return _reloadFlashTime;
         }
     }
-
     IEnumerator AmmoOutRoutine()
     {
         for(int i=0; i<4; i++)
@@ -136,19 +147,8 @@ public class UIManager : Singleton<UIManager>
             yield return _reloadFlashTime;
         }
     }
-
-    IEnumerator HealthLowRoutine()
-    {
-        while(true)
-        {
-            //health up power up mechanic need to be added here.
-            _currentHealthImg.gameObject.SetActive(false);
-            yield return _reloadFlashTime;
-            _currentHealthImg.gameObject.SetActive(true);
-            yield return _reloadFlashTime;
-        }
-    }
     #endregion
+
 
     #region GameEnd
     public void GameWon()

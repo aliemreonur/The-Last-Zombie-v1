@@ -8,39 +8,43 @@ public class WeaponController : Singleton<WeaponController>
     /// <summary>
     /// IMPORTANT: Weapon ID's need to be ordered accordingly on the Right Hand in the inspector. 
     /// </summary>
-
+    #region Fields
     [SerializeField] ParticleSystem _fireMuzzleEffect;
     public WeaponType[] weaponTypes;
     public Action OnPlayerReload;
     public bool IsMelee => _isMelee;
 
     //Needs attention
-    private WeaponType _currentWeapon; //will move this to a new class rather than a scriptable obj.
+    private WeaponType _currentWeapon; //might change this to a normal class 
     private bool _isMelee, _canShoot = true, _isReloading; 
     private int _maxAmmo, _currentAmmo;
     private int _currentWeaponId;
     private float _fireRate, _nextFire=0;
     private AudioSource _audioSource;
     private AudioClip _shotClip;
-
     private WaitForSeconds _reloadTime = new WaitForSeconds(2); //maybe this can also be pulled through the weapontype class
+    #endregion
 
-    void Start()
+    #region StartGame
+    private void OnEnable()
     {
+        PlayerController.Instance.changeWeapon.performed += OnChangeWeapon;
+        PlayerController.Instance.reload.performed += OnReload;
+
         _audioSource = GetComponent<AudioSource>();
         {
-            if(_audioSource == null)
+            if (_audioSource == null)
             {
                 Debug.LogError("The audio source on the weapon is null");
             }
         }
-        ChangeWeapon(1); //start with the gun!
-        _currentWeaponId = 1;
-        _currentWeapon.currentAmmo = _currentWeapon.maxAmmo;
-        _currentAmmo = _currentWeapon.currentAmmo;
-        PlayerController.Instance.changeWeapon.performed += OnChangeWeapon;
-        PlayerController.Instance.reload.performed += OnReload;
+
     }
+    void Start()
+    {
+        StartWeapon();
+    }
+    #endregion
 
     #region Reload
     private void OnReload(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -53,9 +57,8 @@ public class WeaponController : Singleton<WeaponController>
 
     private void Reload()
     {
-        if (((_currentAmmo < _maxAmmo)) && !_isReloading && !_isMelee) //TOO MANY CONDITIONS!!
+        if (((_currentAmmo < _maxAmmo)) && !_isReloading && !_isMelee)
         {
-            //better to update to method callback system
             _isReloading = true;
             if (_currentWeapon.reloadClip != null)
             {
@@ -136,12 +139,20 @@ public class WeaponController : Singleton<WeaponController>
                 UIManager.Instance.UpdateAmmoCount(_currentAmmo, _maxAmmo, false);
             }
         }
+    }
 
+    private void StartWeapon()
+    {
+        _currentWeapon = weaponTypes[1];
+        _currentWeapon.currentAmmo = _currentWeapon.maxAmmo;
+        MatchWeaponValues();
     }
 
     private void ChangeWeapon(int id)
     {
+        _currentWeapon.currentAmmo = _currentAmmo;
         _currentWeapon = weaponTypes[id];
+
         int i = 0;
         foreach(Transform weapon in transform)
         {
@@ -155,14 +166,19 @@ public class WeaponController : Singleton<WeaponController>
             }
             i++;
         }
+        MatchWeaponValues();
+        UIManager.Instance.ChangeWeapon(_currentWeapon.name, _currentWeapon.isMelee);
+    }
+
+    private void MatchWeaponValues()
+    {
         _isMelee = _currentWeapon.isMelee;
         _maxAmmo = _currentWeapon.maxAmmo;
         _fireRate = _currentWeapon.fireRate;
         _shotClip = _currentWeapon.shotClip;
         _currentAmmo = _currentWeapon.currentAmmo;
-        Debug.Log("Setted the current ammo to: " + _currentAmmo + "weapon ammo: " + _currentWeapon.currentAmmo);
-        UIManager.Instance.ChangeWeapon(_currentWeapon.name, _currentWeapon.isMelee);
     }
+
     #endregion
 
 }

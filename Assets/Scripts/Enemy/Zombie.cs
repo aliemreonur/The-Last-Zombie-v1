@@ -18,13 +18,6 @@ public class Zombie : MonoBehaviour
 
 
     #region Properties
-    public int ZHealth
-    {
-        get
-        {
-            return _zHealth;
-        }
-    }
 
     public bool IsHit
     {
@@ -38,14 +31,7 @@ public class Zombie : MonoBehaviour
         }
     }
 
-    public bool IsAlive
-    {
-        get
-        {
-            return _zHealth > 0;
-        }
-    }
-
+    public bool IsAlive => _zHealth>0;
 
     public bool IsAlerted
     {
@@ -73,7 +59,6 @@ public class Zombie : MonoBehaviour
 
     #endregion
 
-    #region Methods
     private void Start()
     {
         HealthBarActive(false);
@@ -95,10 +80,10 @@ public class Zombie : MonoBehaviour
             _zHealth--;
             _healthBar.fillAmount = _zHealth / _maxZHealth;
             StartCoroutine(ResetHealthBarRoutine());
-            if (_zHealth == 0)
+            if (_zHealth <= 0)
             {
                 WaveManager.Instance.currentAlive--;
-                UIManager.Instance.UpdateEnemyCount(WaveManager.Instance.currentAlive); //This will be changed.
+                UIManager.Instance.UpdateEnemyCount(WaveManager.Instance.currentAlive); 
                 Invoke("DisableZombie", 3f);
             }
         }
@@ -138,5 +123,5 @@ public class Zombie : MonoBehaviour
         yield return healthBarResetTime;
         HealthBarActive(false);
     }
-    #endregion
+
 }

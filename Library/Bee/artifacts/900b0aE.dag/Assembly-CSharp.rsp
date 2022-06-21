@@ -360,7 +360,6 @@
 -r:"Library/Bee/artifacts/900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/900b0aE.dag/UnityEngine.UI.ref.dll"
-"Assets/Scripts/AgentType.cs"
 "Assets/Scripts/Enemy/BloodEffect.cs"
 "Assets/Scripts/Enemy/HealthBarLookAt.cs"
 "Assets/Scripts/Enemy/PlayerDetect.cs"

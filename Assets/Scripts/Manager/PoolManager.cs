@@ -5,24 +5,32 @@ using UnityEngine;
 public class PoolManager : Singleton<PoolManager>
 {
     /// <summary>
-    /// 
+    /// This code repeats itself 3 times!
+    /// Idea 1: Generalize them all as a gameobject - need to make sure that I do not need to access the properties from anotherscript
+    /// Idea 2: use Generic ? Look up if its possible.
     /// </summary>
-    /// 
+    ///
+
+    [SerializeField] private GameObject[] objPool; //1: bullet - 2:bloodeffect - 3: zombie
+
     [SerializeField] private Bullet _bullet;
     [SerializeField] private BloodEffect _bloodEffect;
     [SerializeField] private Zombie _zombie;
 
     public List<Bullet> bulletPool = new List<Bullet>();
+    public List<Zombie> zombiePool = new List<Zombie>();
     public List<BloodEffect> bloodEffectPool = new List<BloodEffect>();
 
-    private int numberOfBullets = 20;
-    private int numberOfBlood = 20;
+    private int _numberOfBullets = 20;
+    private int _numberOfBlood = 20;
+    private int _numberOfZombies = 50;
 
     // Start is called before the first frame update
     void Start()
     {
-        GenerateBullets(numberOfBullets);
-        GenerateBloodEFfectPool(numberOfBlood);
+        GenerateBullets(_numberOfBullets);
+        GenerateBloodEFfectPool(_numberOfBlood);
+        GenerateZombies(_numberOfZombies);
     }
 
     List<Bullet> GenerateBullets(int amount)
@@ -49,6 +57,18 @@ public class PoolManager : Singleton<PoolManager>
         return bloodEffectPool;
     }
 
+    List<Zombie> GenerateZombies(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            Zombie zombie = Instantiate(_zombie, transform.position, Quaternion.identity, transform);
+            zombie.gameObject.SetActive(false);
+            zombiePool.Add(zombie);
+        }
+
+        return zombiePool;
+    }
+
     public Bullet RequestBullet(Vector3 bulletPos)
     {
         foreach(Bullet bullet in bulletPool)
@@ -67,6 +87,25 @@ public class PoolManager : Singleton<PoolManager>
         newBullet.transform.position = bulletPos;
         return newBullet;
 
+    }
+
+    public Zombie RequestZombie(Vector3 zombiePos)
+    {
+        foreach (Zombie zombie in zombiePool)
+        {
+            if (!zombie.gameObject.activeInHierarchy)
+            {
+                zombie.transform.position = zombiePos;
+                zombie.gameObject.SetActive(true);
+                return zombie;
+            }
+
+        }
+
+        Zombie newZombie = Instantiate(_zombie, transform.position, Quaternion.identity, transform);
+        zombiePool.Add(newZombie);
+        newZombie.transform.position = zombiePos;
+        return newZombie;
     }
 
     public BloodEffect RequestBloodEffect(Vector3 bloodPosition)
