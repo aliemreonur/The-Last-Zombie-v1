@@ -5,13 +5,12 @@ using UnityEngine;
 public class PoolManager : Singleton<PoolManager>
 {
     /// <summary>
-    /// This code repeats itself 3 times!
-    /// Idea 1: Generalize them all as a gameobject - need to make sure that I do not need to access the properties from anotherscript
-    /// Idea 2: use Generic ? Look up if its possible.
+    /// This code repeats itself 3 times! Will be fixed.
+    /// Bloodeffect gameplay apperance is currently buggy
     /// </summary>
     ///
 
-    [SerializeField] private GameObject[] objPool; //1: bullet - 2:bloodeffect - 3: zombie
+    //[SerializeField] private GameObject[] objPool; //1: bullet - 2:bloodeffect - 3: zombie
 
     [SerializeField] private Bullet _bullet;
     [SerializeField] private BloodEffect _bloodEffect;

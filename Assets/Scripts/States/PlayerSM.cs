@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerSM : MonoBehaviour
 {
+    #region Fields
     [HideInInspector] public Idle idleState;
     [HideInInspector] public Running runningState;
     [HideInInspector] public Firing firingState;
@@ -11,6 +12,7 @@ public class PlayerSM : MonoBehaviour
 
     public Animator animator;
     BaseState currentState;
+    #endregion
 
     private void Awake()
     {
@@ -21,7 +23,6 @@ public class PlayerSM : MonoBehaviour
         playerMeleeAttack = new PlayerMeleeAttack(this, animator);
         playerDead = new Dead(this, animator);
     }
-
 
     void Start()
     {

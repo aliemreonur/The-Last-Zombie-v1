@@ -17,7 +17,8 @@ public class EnemyDead : EnemyState
 
     public override void NormalUpdate()
     {
-       
+        if (zombie.IsAlive)
+            enemyStateMachine.ChangeState(enemyStateMachine.enemyIdle);
     }
 
     public override void PhysicsUpdate()
@@ -27,6 +28,7 @@ public class EnemyDead : EnemyState
 
     public override void Exit()
     {
-        
+        navMeshAgent.isStopped = false;
+        animator.ResetTrigger("isDead");
     }
 }

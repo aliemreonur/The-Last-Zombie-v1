@@ -15,12 +15,11 @@ public class EnemyStateMachine : MonoBehaviour
 
     private NavMeshAgent _navMeshAgent;
     private Animator _animator;
-    private EnemyState currentEnemyState;
+    [SerializeField] private EnemyState currentEnemyState;
     private Zombie _zombie;
 
     void Awake()
     {
-   
         Initialize();
         enemyIdle = new EnemyIdle(_zombie, _navMeshAgent, _animator, this);
         enemyPatrol = new EnemyPatrol(_zombie, _navMeshAgent, _animator, this);
@@ -64,7 +63,14 @@ public class EnemyStateMachine : MonoBehaviour
 
     protected EnemyState GetInitialState()
     {
-        return enemyIdle;
+        if (currentEnemyState == enemyDead)
+        {
+            return enemyDead;
+        }
+        else
+        {
+            return enemyIdle;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -72,6 +78,7 @@ public class EnemyStateMachine : MonoBehaviour
         if (other.gameObject.CompareTag("Bullet") && _zombie.IsAlive)
         {
             BloodEffect bloodEffect = PoolManager.Instance.RequestBloodEffect(other.transform.position);
+            //placement is currently buggy
             if(bloodEffect != null)
             {
                 bloodEffect.transform.parent = transform;
@@ -121,4 +128,5 @@ public class EnemyStateMachine : MonoBehaviour
     {
         GameManager.Instance.OnGameEnd -= GameEnd;
     }
+
 }

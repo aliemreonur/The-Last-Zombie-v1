@@ -77,7 +77,6 @@
     <Compile Include="Assets/Scripts/Enemy/Zombie.cs" />
     <Compile Include="Assets/Scripts/PlayerInputActions.cs" />
     <Compile Include="Assets/Scripts/WeaponType.cs" />
-    <Compile Include="Assets/Scripts/Weapon.cs" />
     <Compile Include="Assets/Scripts/States/Enemy States/EnemyChasePlayer.cs" />
     <Compile Include="Assets/Scripts/States/Enemy States/EnemyAttacking.cs" />
     <Compile Include="Assets/Scripts/Enemy/BloodEffect.cs" />

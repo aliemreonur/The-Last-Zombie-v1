@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Zombie : MonoBehaviour
 {
+    #region Fields
     [SerializeField] private int _zHealth = 3;
     [SerializeField] private bool _isHit;
     [SerializeField] private Image _healthBg;
@@ -15,7 +16,7 @@ public class Zombie : MonoBehaviour
     private float _maxZHealth;
     private WaitForSeconds hitResetTime = new WaitForSeconds(0.3f);
     private WaitForSeconds healthBarResetTime = new WaitForSeconds(1.5f);
-
+    #endregion
 
     #region Properties
 
@@ -59,13 +60,7 @@ public class Zombie : MonoBehaviour
 
     #endregion
 
-    private void Start()
-    {
-        HealthBarActive(false);
-        _distanceToPlayer = 50;
-        _maxZHealth = _zHealth;
-    }
-
+    #region Public Methods
     public void Damage(bool isMelee = false)
     {
         if (_zHealth > 0)
@@ -84,7 +79,7 @@ public class Zombie : MonoBehaviour
             {
                 WaveManager.Instance.currentAlive--;
                 UIManager.Instance.UpdateEnemyCount(WaveManager.Instance.currentAlive); 
-                Invoke("DisableZombie", 3f);
+                Invoke("DisableZombie", 2.5f);
             }
         }
     }
@@ -96,6 +91,21 @@ public class Zombie : MonoBehaviour
             _distanceToPlayer = (transform.position - PlayerController.Instance.transform.position).sqrMagnitude;
         }
         return _distanceToPlayer;
+    }
+    #endregion
+
+    #region Private Methods
+
+    private void OnEnable()
+    {
+        _zHealth = 3;
+    }
+
+    private void Start()
+    {
+        HealthBarActive(false);
+        _distanceToPlayer = 50;
+        _maxZHealth = _zHealth;
     }
 
     private void HealthBarActive(bool isActive)
@@ -123,5 +133,5 @@ public class Zombie : MonoBehaviour
         yield return healthBarResetTime;
         HealthBarActive(false);
     }
-
+    #endregion
 }

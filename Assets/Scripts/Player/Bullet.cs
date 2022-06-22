@@ -6,16 +6,11 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _speed;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //disable functionality will be added.
-    }
-
-    // Update is called once per frame
     void Update()
     {
         transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+        if (Mathf.Abs(transform.position.x) > 200 || Mathf.Abs(transform.position.z) > 200)
+            gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,7 +26,5 @@ public class Bullet : MonoBehaviour
     {
         transform.position = PoolManager.Instance.transform.position;
     }
-
-    //Disable on hit zombie or end points.
 
 }

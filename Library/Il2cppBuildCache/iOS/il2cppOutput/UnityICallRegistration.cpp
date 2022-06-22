@@ -56,17 +56,117 @@ void RegisterAllStrippedInternalCalls()
 
 	//End Registrations for type : Unity.Profiling.LowLevel.Unsafe.ProfilerUnsafeUtility
 
+	//Start Registrations for type : UnityEngine.AI.NavMesh
+
+		//System.Boolean UnityEngine.AI.NavMesh::InternalSetLinkOwner(System.Int32,System.Int32)
+		void Register_UnityEngine_AI_NavMesh_InternalSetLinkOwner();
+		Register_UnityEngine_AI_NavMesh_InternalSetLinkOwner();
+
+		//System.Boolean UnityEngine.AI.NavMesh::InternalSetOwner(System.Int32,System.Int32)
+		void Register_UnityEngine_AI_NavMesh_InternalSetOwner();
+		Register_UnityEngine_AI_NavMesh_InternalSetOwner();
+
+		//System.Boolean UnityEngine.AI.NavMesh::IsValidLinkHandle(System.Int32)
+		void Register_UnityEngine_AI_NavMesh_IsValidLinkHandle();
+		Register_UnityEngine_AI_NavMesh_IsValidLinkHandle();
+
+		//System.Boolean UnityEngine.AI.NavMesh::IsValidNavMeshDataHandle(System.Int32)
+		void Register_UnityEngine_AI_NavMesh_IsValidNavMeshDataHandle();
+		Register_UnityEngine_AI_NavMesh_IsValidNavMeshDataHandle();
+
+		//System.Int32 UnityEngine.AI.NavMesh::AddLinkInternal_Injected(UnityEngine.AI.NavMeshLinkData&,UnityEngine.Vector3&,UnityEngine.Quaternion&)
+		void Register_UnityEngine_AI_NavMesh_AddLinkInternal_Injected();
+		Register_UnityEngine_AI_NavMesh_AddLinkInternal_Injected();
+
+		//System.Int32 UnityEngine.AI.NavMesh::AddNavMeshDataTransformedInternal_Injected(UnityEngine.AI.NavMeshData,UnityEngine.Vector3&,UnityEngine.Quaternion&)
+		void Register_UnityEngine_AI_NavMesh_AddNavMeshDataTransformedInternal_Injected();
+		Register_UnityEngine_AI_NavMesh_AddNavMeshDataTransformedInternal_Injected();
+
+		//System.Void UnityEngine.AI.NavMesh::GetSettingsByID_Injected(System.Int32,UnityEngine.AI.NavMeshBuildSettings&)
+		void Register_UnityEngine_AI_NavMesh_GetSettingsByID_Injected();
+		Register_UnityEngine_AI_NavMesh_GetSettingsByID_Injected();
+
+		//System.Void UnityEngine.AI.NavMesh::RemoveLinkInternal(System.Int32)
+		void Register_UnityEngine_AI_NavMesh_RemoveLinkInternal();
+		Register_UnityEngine_AI_NavMesh_RemoveLinkInternal();
+
+		//System.Void UnityEngine.AI.NavMesh::RemoveNavMeshDataInternal(System.Int32)
+		void Register_UnityEngine_AI_NavMesh_RemoveNavMeshDataInternal();
+		Register_UnityEngine_AI_NavMesh_RemoveNavMeshDataInternal();
+
+	//End Registrations for type : UnityEngine.AI.NavMesh
+
 	//Start Registrations for type : UnityEngine.AI.NavMeshAgent
 
 		//System.Boolean UnityEngine.AI.NavMeshAgent::SetDestination_Injected(UnityEngine.Vector3&)
 		void Register_UnityEngine_AI_NavMeshAgent_SetDestination_Injected();
 		Register_UnityEngine_AI_NavMeshAgent_SetDestination_Injected();
 
+		//System.Single UnityEngine.AI.NavMeshAgent::get_remainingDistance()
+		void Register_UnityEngine_AI_NavMeshAgent_get_remainingDistance();
+		Register_UnityEngine_AI_NavMeshAgent_get_remainingDistance();
+
+		//System.Single UnityEngine.AI.NavMeshAgent::get_speed()
+		void Register_UnityEngine_AI_NavMeshAgent_get_speed();
+		Register_UnityEngine_AI_NavMeshAgent_get_speed();
+
+		//System.Void UnityEngine.AI.NavMeshAgent::Move_Injected(UnityEngine.Vector3&)
+		void Register_UnityEngine_AI_NavMeshAgent_Move_Injected();
+		Register_UnityEngine_AI_NavMeshAgent_Move_Injected();
+
 		//System.Void UnityEngine.AI.NavMeshAgent::set_isStopped(System.Boolean)
 		void Register_UnityEngine_AI_NavMeshAgent_set_isStopped();
 		Register_UnityEngine_AI_NavMeshAgent_set_isStopped();
 
+		//System.Void UnityEngine.AI.NavMeshAgent::set_speed(System.Single)
+		void Register_UnityEngine_AI_NavMeshAgent_set_speed();
+		Register_UnityEngine_AI_NavMeshAgent_set_speed();
+
 	//End Registrations for type : UnityEngine.AI.NavMeshAgent
+
+	//Start Registrations for type : UnityEngine.AI.NavMeshBuilder
+
+		//System.Boolean UnityEngine.AI.NavMeshBuilder::UpdateNavMeshDataListInternal_Injected(UnityEngine.AI.NavMeshData,UnityEngine.AI.NavMeshBuildSettings&,System.Object,UnityEngine.Bounds&)
+		void Register_UnityEngine_AI_NavMeshBuilder_UpdateNavMeshDataListInternal_Injected();
+		Register_UnityEngine_AI_NavMeshBuilder_UpdateNavMeshDataListInternal_Injected();
+
+		//UnityEngine.AI.NavMeshBuildSource[] UnityEngine.AI.NavMeshBuilder::CollectSourcesInternal_Injected(System.Int32,UnityEngine.Bounds&,UnityEngine.Transform,System.Boolean,UnityEngine.AI.NavMeshCollectGeometry,System.Int32,UnityEngine.AI.NavMeshBuildMarkup[])
+		void Register_UnityEngine_AI_NavMeshBuilder_CollectSourcesInternal_Injected();
+		Register_UnityEngine_AI_NavMeshBuilder_CollectSourcesInternal_Injected();
+
+		//UnityEngine.AsyncOperation UnityEngine.AI.NavMeshBuilder::UpdateNavMeshDataAsyncListInternal_Injected(UnityEngine.AI.NavMeshData,UnityEngine.AI.NavMeshBuildSettings&,System.Object,UnityEngine.Bounds&)
+		void Register_UnityEngine_AI_NavMeshBuilder_UpdateNavMeshDataAsyncListInternal_Injected();
+		Register_UnityEngine_AI_NavMeshBuilder_UpdateNavMeshDataAsyncListInternal_Injected();
+
+	//End Registrations for type : UnityEngine.AI.NavMeshBuilder
+
+	//Start Registrations for type : UnityEngine.AI.NavMeshBuildSource
+
+		//UnityEngine.Component UnityEngine.AI.NavMeshBuildSource::InternalGetComponent(System.Int32)
+		void Register_UnityEngine_AI_NavMeshBuildSource_InternalGetComponent();
+		Register_UnityEngine_AI_NavMeshBuildSource_InternalGetComponent();
+
+		//UnityEngine.Object UnityEngine.AI.NavMeshBuildSource::InternalGetObject(System.Int32)
+		void Register_UnityEngine_AI_NavMeshBuildSource_InternalGetObject();
+		Register_UnityEngine_AI_NavMeshBuildSource_InternalGetObject();
+
+	//End Registrations for type : UnityEngine.AI.NavMeshBuildSource
+
+	//Start Registrations for type : UnityEngine.AI.NavMeshData
+
+		//System.Void UnityEngine.AI.NavMeshData::Internal_Create(UnityEngine.AI.NavMeshData,System.Int32)
+		void Register_UnityEngine_AI_NavMeshData_Internal_Create();
+		Register_UnityEngine_AI_NavMeshData_Internal_Create();
+
+		//System.Void UnityEngine.AI.NavMeshData::set_position_Injected(UnityEngine.Vector3&)
+		void Register_UnityEngine_AI_NavMeshData_set_position_Injected();
+		Register_UnityEngine_AI_NavMeshData_set_position_Injected();
+
+		//System.Void UnityEngine.AI.NavMeshData::set_rotation_Injected(UnityEngine.Quaternion&)
+		void Register_UnityEngine_AI_NavMeshData_set_rotation_Injected();
+		Register_UnityEngine_AI_NavMeshData_set_rotation_Injected();
+
+	//End Registrations for type : UnityEngine.AI.NavMeshData
 
 	//Start Registrations for type : UnityEngine.Animation
 
@@ -1550,10 +1650,6 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_GUIStyle_get_stretchWidth();
 		Register_UnityEngine_GUIStyle_get_stretchWidth();
 
-		//System.Boolean UnityEngine.GUIStyle::get_wordWrap()
-		void Register_UnityEngine_GUIStyle_get_wordWrap();
-		Register_UnityEngine_GUIStyle_get_wordWrap();
-
 		//System.Int32 UnityEngine.GUIStyle::Internal_GetCursorStringIndex_Injected(UnityEngine.Rect&,UnityEngine.GUIContent,UnityEngine.Vector2&)
 		void Register_UnityEngine_GUIStyle_Internal_GetCursorStringIndex_Injected();
 		Register_UnityEngine_GUIStyle_Internal_GetCursorStringIndex_Injected();
@@ -1597,14 +1693,6 @@ void RegisterAllStrippedInternalCalls()
 		//System.String UnityEngine.GUIStyle::get_rawName()
 		void Register_UnityEngine_GUIStyle_get_rawName();
 		Register_UnityEngine_GUIStyle_get_rawName();
-
-		//System.Void UnityEngine.GUIStyle::Internal_CalcMinMaxWidth_Injected(UnityEngine.GUIContent,UnityEngine.Vector2&)
-		void Register_UnityEngine_GUIStyle_Internal_CalcMinMaxWidth_Injected();
-		Register_UnityEngine_GUIStyle_Internal_CalcMinMaxWidth_Injected();
-
-		//System.Void UnityEngine.GUIStyle::Internal_CalcSizeWithConstraints_Injected(UnityEngine.GUIContent,UnityEngine.Vector2&,UnityEngine.Vector2&)
-		void Register_UnityEngine_GUIStyle_Internal_CalcSizeWithConstraints_Injected();
-		Register_UnityEngine_GUIStyle_Internal_CalcSizeWithConstraints_Injected();
 
 		//System.Void UnityEngine.GUIStyle::Internal_CalcSize_Injected(UnityEngine.GUIContent,UnityEngine.Vector2&)
 		void Register_UnityEngine_GUIStyle_Internal_CalcSize_Injected();
@@ -1673,10 +1761,6 @@ void RegisterAllStrippedInternalCalls()
 		//UnityEngine.Font UnityEngine.GUIStyle::get_font()
 		void Register_UnityEngine_GUIStyle_get_font();
 		Register_UnityEngine_GUIStyle_get_font();
-
-		//UnityEngine.ImagePosition UnityEngine.GUIStyle::get_imagePosition()
-		void Register_UnityEngine_GUIStyle_get_imagePosition();
-		Register_UnityEngine_GUIStyle_get_imagePosition();
 
 	//End Registrations for type : UnityEngine.GUIStyle
 
@@ -1805,10 +1889,6 @@ void RegisterAllStrippedInternalCalls()
 		//System.Boolean UnityEngine.Input::GetButtonDown(System.String)
 		void Register_UnityEngine_Input_GetButtonDown();
 		Register_UnityEngine_Input_GetButtonDown();
-
-		//System.Boolean UnityEngine.Input::GetKeyDownInt(UnityEngine.KeyCode)
-		void Register_UnityEngine_Input_GetKeyDownInt();
-		Register_UnityEngine_Input_GetKeyDownInt();
 
 		//System.Boolean UnityEngine.Input::GetMouseButton(System.Int32)
 		void Register_UnityEngine_Input_GetMouseButton();
@@ -3548,6 +3628,54 @@ void RegisterAllStrippedInternalCalls()
 
 	//End Registrations for type : UnityEngine.SystemInfo
 
+	//Start Registrations for type : UnityEngine.Terrain
+
+		//System.Boolean UnityEngine.Terrain::get_allowAutoConnect()
+		void Register_UnityEngine_Terrain_get_allowAutoConnect();
+		Register_UnityEngine_Terrain_get_allowAutoConnect();
+
+		//System.Int32 UnityEngine.Terrain::get_groupingID()
+		void Register_UnityEngine_Terrain_get_groupingID();
+		Register_UnityEngine_Terrain_get_groupingID();
+
+		//System.Void UnityEngine.Terrain::SetNeighbors(UnityEngine.Terrain,UnityEngine.Terrain,UnityEngine.Terrain,UnityEngine.Terrain)
+		void Register_UnityEngine_Terrain_SetNeighbors();
+		Register_UnityEngine_Terrain_SetNeighbors();
+
+		//UnityEngine.TerrainData UnityEngine.Terrain::get_terrainData()
+		void Register_UnityEngine_Terrain_get_terrainData();
+		Register_UnityEngine_Terrain_get_terrainData();
+
+		//UnityEngine.Terrain[] UnityEngine.Terrain::get_activeTerrains()
+		void Register_UnityEngine_Terrain_get_activeTerrains();
+		Register_UnityEngine_Terrain_get_activeTerrains();
+
+	//End Registrations for type : UnityEngine.Terrain
+
+	//Start Registrations for type : UnityEngine.TerrainData
+
+		//System.Int32 UnityEngine.TerrainData::GetBoundaryValue(UnityEngine.TerrainData/BoundaryValueType)
+		void Register_UnityEngine_TerrainData_GetBoundaryValue();
+		Register_UnityEngine_TerrainData_GetBoundaryValue();
+
+		//System.Single UnityEngine.TerrainData::GetAlphamapResolutionInternal()
+		void Register_UnityEngine_TerrainData_GetAlphamapResolutionInternal();
+		Register_UnityEngine_TerrainData_GetAlphamapResolutionInternal();
+
+		//System.Void UnityEngine.TerrainData::Internal_Create(UnityEngine.TerrainData)
+		void Register_UnityEngine_TerrainData_Internal_Create();
+		Register_UnityEngine_TerrainData_Internal_Create();
+
+		//System.Void UnityEngine.TerrainData::get_size_Injected(UnityEngine.Vector3&)
+		void Register_UnityEngine_TerrainData_get_size_Injected();
+		Register_UnityEngine_TerrainData_get_size_Injected();
+
+		//UnityEngine.Terrain[] UnityEngine.TerrainData::get_users()
+		void Register_UnityEngine_TerrainData_get_users();
+		Register_UnityEngine_TerrainData_get_users();
+
+	//End Registrations for type : UnityEngine.TerrainData
+
 	//Start Registrations for type : UnityEngine.TextAsset
 
 		//System.Byte[] UnityEngine.TextAsset::get_bytes()
@@ -3817,6 +3945,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.Single UnityEngine.Time::get_unscaledTime()
 		void Register_UnityEngine_Time_get_unscaledTime();
 		Register_UnityEngine_Time_get_unscaledTime();
+
+		//System.Void UnityEngine.Time::set_timeScale(System.Single)
+		void Register_UnityEngine_Time_set_timeScale();
+		Register_UnityEngine_Time_set_timeScale();
 
 	//End Registrations for type : UnityEngine.Time
 

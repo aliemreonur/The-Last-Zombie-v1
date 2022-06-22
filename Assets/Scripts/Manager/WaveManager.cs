@@ -5,6 +5,7 @@ using System;
 
 public class WaveManager : Singleton<WaveManager>
 {
+    #region Fields
     [SerializeField] private List<Wave> _waves = new List<Wave>();
     [SerializeField] private Zombie _zombiePrefab;
     [SerializeField] Transform spawnPositionStartRight, spawnPositionEndLeft; //THESE VARIABLES ARE NOT SUITABLE FOR AUTOMATED LEVEL GENERATION! NEEDS MANUAL ADJUSTMENT
@@ -18,7 +19,9 @@ public class WaveManager : Singleton<WaveManager>
     private int _currentWaveIndex;
     private WaitForSeconds timeBtwWaves = new WaitForSeconds(5f);
     private bool _wavesFinished;
+    #endregion
 
+    #region Methods
     void Start()
     {
         GetSpawnLimitPoints(); 
@@ -74,4 +77,5 @@ public class WaveManager : Singleton<WaveManager>
             yield return new WaitForSeconds(1f);
         }
     }
+    #endregion
 }

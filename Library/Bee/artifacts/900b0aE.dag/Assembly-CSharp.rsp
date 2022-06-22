@@ -394,7 +394,6 @@
 "Assets/Scripts/States/PlayerSM.cs"
 "Assets/Scripts/States/Running.cs"
 "Assets/Scripts/States/RunningFiring.cs"
-"Assets/Scripts/Weapon.cs"
 "Assets/Scripts/WeaponType.cs"
 -langversion:9.0
 

@@ -6,7 +6,8 @@ using System;
 public class WeaponController : Singleton<WeaponController>
 {
     /// <summary>
-    /// IMPORTANT: Weapon ID's need to be ordered accordingly on the Right Hand in the inspector. 
+    /// IMPORTANT: Weapon ID's need to be ordered accordingly on the Right Hand in the inspector.
+    /// 
     /// </summary>
     #region Fields
     [SerializeField] ParticleSystem _fireMuzzleEffect;

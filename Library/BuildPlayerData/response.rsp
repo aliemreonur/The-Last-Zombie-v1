@@ -18,6 +18,7 @@
 -a="/Users/aliemreonur/The Last Zombie/Library/PlayerScriptAssemblies/Unity.Services.Core.Scheduler.dll"
 -a="/Users/aliemreonur/The Last Zombie/Library/PlayerScriptAssemblies/Unity.Services.Core.Environments.Internal.dll"
 -a="/Users/aliemreonur/The Last Zombie/Library/PlayerScriptAssemblies/Unity.Services.Core.Threading.dll"
+-a="/Users/aliemreonur/The Last Zombie/Library/PlayerScriptAssemblies/Unity.AI.Navigation.dll"
 -a="/Users/aliemreonur/The Last Zombie/Library/PlayerScriptAssemblies/Unity.VisualScripting.State.dll"
 -a="/Users/aliemreonur/The Last Zombie/Library/PlayerScriptAssemblies/Unity.Services.Core.Device.dll"
 -a="/Users/aliemreonur/The Last Zombie/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.0.2/Runtime/AOT/Newtonsoft.Json.dll"

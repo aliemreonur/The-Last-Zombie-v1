@@ -7,6 +7,7 @@ using UnityEngine.AI;
 
 public class PlayerController : Singleton<PlayerController>
 {
+    #region Fields
     [SerializeField] private float _speed = 3f;
     [SerializeField] int _playerHealth = 100;
 
@@ -19,14 +20,18 @@ public class PlayerController : Singleton<PlayerController>
     private WaitForSeconds _playerHitSlowDown = new WaitForSeconds(2f);
     private NavMeshAgent _navMeshAgent;
 
+    #endregion
+
+    #region Properties
     public bool IsAlive
     {
         get { return _isAlive; }
     }
+    #endregion
 
+    #region Public Methods
     public void Damage(int damageAmount)
     {
-        //_isHit = true;
         StartCoroutine(PlayerHitRoutine());
         _playerHealth -= damageAmount;
         if (_playerHealth <= 0 && _isAlive)
@@ -37,6 +42,9 @@ public class PlayerController : Singleton<PlayerController>
         UIManager.Instance.UpdatePlayerHealth(_playerHealth);
     }
 
+    #endregion
+
+    #region Private Methods
     private void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -83,4 +91,5 @@ public class PlayerController : Singleton<PlayerController>
         yield return _playerHitSlowDown;
         _speed = _initialSpeed;
     }
+    #endregion
 }

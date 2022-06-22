@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
+    #region Fields
     [SerializeField] private Text _reloadText, _ammoText, _weaponText;
     [SerializeField] private GameObject _successPanel, _failPanel, _welcomePanel;
     [SerializeField] private Sprite[] _healthImgs;
@@ -13,6 +14,7 @@ public class UIManager : Singleton<UIManager>
 
     private WaitForSeconds _reloadFlashTime = new WaitForSeconds(0.25f);
     private bool _isLowHealth = false;
+    #endregion
 
     #region GameStart
     private void OnEnable()
@@ -36,16 +38,16 @@ public class UIManager : Singleton<UIManager>
     public void PassWelcomeScreen()
     {
         _welcomePanel.gameObject.SetActive(false);
-        PlayerPrefs.SetInt("FirstTime5", 0);
+        PlayerPrefs.SetInt("FirstTime", 0);
         PlayerPrefs.Save();
         GameManager.Instance.OnGameStart();
     }
 
     private void CheckFirstTime()
     {
-        if (PlayerPrefs.HasKey("FirstTime5"))
+        if (PlayerPrefs.HasKey("FirstTime"))
         {
-            int firstTime = PlayerPrefs.GetInt("FirstTime5");
+            int firstTime = PlayerPrefs.GetInt("FirstTime");
             if (firstTime == 0) // meaning that player has started the game before
             {
                 _welcomePanel.gameObject.SetActive(false);
@@ -148,7 +150,6 @@ public class UIManager : Singleton<UIManager>
         }
     }
     #endregion
-
 
     #region GameEnd
     public void GameWon()
