@@ -53,7 +53,8 @@ public class WaveManager : Singleton<WaveManager>
                 {
                     _numberSpawned++;
                     Vector3 posToSpawn = new Vector3(UnityEngine.Random.Range(posXLeftEdge, posXRightEdge), 0.1f, posZEnd);
-                    PoolManager.Instance.RequestZombie(posToSpawn);
+                    //PoolManager.Instance.RequestZombie(posToSpawn);
+                    PoolManager.Instance.RequestObject(0, posToSpawn);
                     currentAlive++;
                     yield return timeBtwSpawns;
                     UIManager.Instance.UpdateEnemyCount(currentAlive);

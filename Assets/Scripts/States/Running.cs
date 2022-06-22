@@ -15,7 +15,7 @@ public class Running : BaseState
 
     public override void NormalUpdate()
     {
-        if (PlayerController.Instance.playerInput.Player.Move.ReadValue<Vector2>() == Vector2.zero)
+        if ((PlayerController.Instance.playerInput.Player.Move.ReadValue<Vector2>().sqrMagnitude) <= float.Epsilon)
         {
             stateMachine.ChangeState(stateMachine.idleState);
         }

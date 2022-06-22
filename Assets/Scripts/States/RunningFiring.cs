@@ -23,13 +23,13 @@ public class RunningFiring : BaseState
         WeaponController.Instance.Fire();
         if (PlayerController.Instance.playerInput.Player.Fire.WasReleasedThisFrame())
         {
-            if (PlayerController.Instance.playerInput.Player.Move.ReadValue<Vector2>() == Vector2.zero)
+            if ((PlayerController.Instance.playerInput.Player.Move.ReadValue<Vector2>().sqrMagnitude) <= float.Epsilon)
                 stateMachine.ChangeState(stateMachine.idleState);
             else
                 stateMachine.ChangeState(stateMachine.runningState);
         }
 
-        else if (PlayerController.Instance.playerInput.Player.Move.ReadValue<Vector2>() == Vector2.zero)
+        else if ((PlayerController.Instance.playerInput.Player.Move.ReadValue<Vector2>().sqrMagnitude) <= float.Epsilon)
         {
             stateMachine.ChangeState(stateMachine.firingState);
         }

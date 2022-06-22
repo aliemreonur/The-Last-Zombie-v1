@@ -105,7 +105,8 @@ public class WeaponController : Singleton<WeaponController>
                 {
                     _audioSource.PlayOneShot(_shotClip);
                 }
-                Bullet bullet = PoolManager.Instance.RequestBullet(transform.position);
+                //Bullet bullet = PoolManager.Instance.RequestBullet(transform.position);
+                GameObject bullet = PoolManager.Instance.RequestObject(1, transform.position);
                 bullet.transform.rotation = PlayerController.Instance.transform.rotation; //may be changed to gunpos rotation later on
                 _currentAmmo--;
                 UIManager.Instance.UpdateAmmoCount(_currentAmmo, _maxAmmo, _currentAmmo <= 0);

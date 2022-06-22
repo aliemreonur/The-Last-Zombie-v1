@@ -1,17 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PoolManager : Singleton<PoolManager>
-{
-    /// <summary>
-    /// This code repeats itself 3 times! Will be fixed.
-    /// Bloodeffect gameplay apperance is currently buggy
-    /// </summary>
-    ///
+{    
+    [Serializable]
+    public struct Pool
+    {
+        [HideInInspector] public List<GameObject> objectsToPool;
+        public GameObject objectPrefab;
+        public int poolSize;
+    }
 
-    //[SerializeField] private GameObject[] objPool; //1: bullet - 2:bloodeffect - 3: zombie
+    [SerializeField] private Pool[] pools; //Zombie, blood, bullet
 
+    private void Awake()
+    {
+        base.Awake();
+
+        for(int j = 0; j<pools.Length; j++)
+        {
+            pools[j].objectsToPool = new List<GameObject>();
+
+            for(int i=0; i<pools[j].poolSize; i++)
+            {
+                GameObject spawnedObj = Instantiate(pools[j].objectPrefab, transform.position, Quaternion.identity, transform);
+                spawnedObj.SetActive(false);
+
+                pools[j].objectsToPool.Add(spawnedObj);
+            }
+        }
+        
+    }
+
+    public GameObject RequestObject(int objectType, Vector3 pos)
+    {
+        foreach(GameObject obj in pools[objectType].objectsToPool)
+        {
+            if(!obj.gameObject.activeInHierarchy)
+            {
+                obj.transform.position = pos;
+                obj.gameObject.SetActive(true);
+                return obj;
+            }
+        }
+
+        GameObject newObj = Instantiate(pools[objectType].objectPrefab, transform.position, Quaternion.identity, transform);
+        pools[objectType].objectsToPool.Add(newObj);
+        newObj.transform.position = pos;
+
+        return newObj;
+    }
+
+
+    /* 
+    //DEPRECIATED CODE
+    #region Fields
     [SerializeField] private Bullet _bullet;
     [SerializeField] private BloodEffect _bloodEffect;
     [SerializeField] private Zombie _zombie;
@@ -23,6 +68,7 @@ public class PoolManager : Singleton<PoolManager>
     private int _numberOfBullets = 20;
     private int _numberOfBlood = 20;
     private int _numberOfZombies = 50;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -124,4 +170,5 @@ public class PoolManager : Singleton<PoolManager>
         additionalBlood.transform.position = bloodPosition;
         return additionalBlood;
     }
+    */
 }

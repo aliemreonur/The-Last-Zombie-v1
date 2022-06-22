@@ -12278,6 +12278,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c513ff0335494a60b884ba3c21c7c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pools:
+  - objectsToPool:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    objectPrefab: {fileID: 1165781636865921800, guid: c611b303373464672a5f1339e662462d, type: 3}
+    poolSize: 40
+  - objectsToPool: []
+    objectPrefab: {fileID: 7141386568917013969, guid: b8977ea1cc75a425d893c7aa457d3c10, type: 3}
+    poolSize: 15
+  - objectsToPool: []
+    objectPrefab: {fileID: 5426987953339704844, guid: e190d8ef0a9cd4583b8062e5f36d2007, type: 3}
+    poolSize: 10
   _bullet: {fileID: 298990922321724623, guid: b8977ea1cc75a425d893c7aa457d3c10, type: 3}
   _bloodEffect: {fileID: -7497824129284462842, guid: e190d8ef0a9cd4583b8062e5f36d2007, type: 3}
   _zombie: {fileID: 288361515967746510, guid: c611b303373464672a5f1339e662462d, type: 3}

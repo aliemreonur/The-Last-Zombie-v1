@@ -77,7 +77,8 @@ public class EnemyStateMachine : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bullet") && _zombie.IsAlive)
         {
-            BloodEffect bloodEffect = PoolManager.Instance.RequestBloodEffect(other.transform.position);
+            //BloodEffect bloodEffect = PoolManager.Instance.RequestBloodEffect(other.transform.position);
+            GameObject bloodEffect = PoolManager.Instance.RequestObject(2, other.transform.position);
             //placement is currently buggy
             if(bloodEffect != null)
             {
